@@ -73,18 +73,19 @@ async function getSupabaseUser(userId) {
     return data;
 }
 
-async function updateSupabaseUser(userId, data) {
-    console.log("Updating user in Supabase:", userId, data);
-    const { error } = await supabaseClient
-        .from('users')
-        .update(data)
-        .eq('id', userId);
+async function updateSupabaseUser(userId, updatedData) {
+    const { data, error } = await supabaseClient
+        .from("users")
+        .update(updatedData)
+        .eq("id", userId);
 
     if (error) {
-        console.error("Supabase Update Error:", error);
-        throw error;
+        console.error("Update failed:", error);
+        alert("Failed to update profile");
+        return;
     }
-    return true;
+
+    alert("Profile updated successfully");
 }
 
 // --- PAGE CONTROLLERS ---
@@ -198,28 +199,18 @@ async function initEditPage() {
         document.getElementById('edit-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Saving...';
-            submitBtn.disabled = true;
+            const userId = getUserId();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const mainAction = document.getElementById('mainAction').value;
 
-            const newData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                linkedin: document.getElementById('linkedin').value,
-                mainAction: document.getElementById('mainAction').value
-            };
-
-            try {
-                await updateSupabaseUser(userId, newData);
-                alert("Saved successfully!");
-                window.location.href = `/u/${userId}`;
-            } catch (updateErr) {
-                console.error("Error saving profile:", updateErr);
-                alert("Failed to save profile. Please try again.");
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
+            await updateSupabaseUser(userId, {
+                name,
+                phone,
+                linkedin,
+                mainAction
+            });
         });
     } catch (err) {
         console.error("Error in initEditPage:", err);
