@@ -55,20 +55,17 @@ async function updateUser(id, data) {
 // --- CORE UTILS ---
 
 // Extract userId from URL
-// Supports both path /u/user1 and query param ?u=user1 for local testing
-function getUserIdFromURL() {
+function getUserId() {
     const path = window.location.pathname;
-    const pathParts = path.split('/');
-    
-    // Check for /u/{userid} format
-    const uIndex = pathParts.indexOf('u');
-    if (uIndex !== -1 && pathParts.length > uIndex + 1) {
-        return pathParts[uIndex + 1];
+
+    // Handle /u/user1
+    if (path.startsWith('/u/')) {
+        return path.split('/u/')[1];
     }
-    
-    // Fallback for query param ?user=user1 (used in edit page mostly, or local testing)
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('user') || urlParams.get('u');
+
+    // Handle ?u=user1
+    const params = new URLSearchParams(window.location.search);
+    return params.get('u');
 }
 
 // Generate and download VCF
@@ -94,7 +91,7 @@ END:VCARD`;
 // --- PAGE CONTROLLERS ---
 
 async function initProfilePage() {
-    const userId = getUserIdFromURL();
+    const userId = getUserId();
     const loadingEl = document.getElementById('loading');
     const profileEl = document.getElementById('profile-card');
     const errorEl = document.getElementById('error-message');
@@ -155,7 +152,7 @@ async function initProfilePage() {
 }
 
 async function initEditPage() {
-    const userId = getUserIdFromURL();
+    const userId = getUserId();
     if (!userId) {
         alert("No user specified to edit. Use ?user=user1 in URL.");
         return;
