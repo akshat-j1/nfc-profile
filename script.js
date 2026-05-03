@@ -57,28 +57,33 @@ END:VCARD`;
 // --- SUPABASE API ---
 
 async function getSupabaseUser(userId) {
-    console.log("Fetching ALL users from Supabase");
+    const cleanUserId = decodeURIComponent(userId).trim().replace(/\n/g, "");
+    console.log("Clean userId:", cleanUserId);
     
     const { data, error } = await supabaseClient
         .from("users")
         .select("*");
-
-    console.log("Response:", data, error);
-    
-    if (data && data.length > 0) {
-        console.log("First user:", data[0]);
-    }
 
     if (error) {
         console.error("Supabase Error:", error);
         throw error;
     }
 
-    if (!data || data.length === 0) {
+    console.log("Raw DB data:", data);
+
+    if (!data) {
         throw new Error("User not found");
     }
 
-    return data[0];
+    const user = data.find(u => 
+        u.id && u.id.trim().replace(/\n/g, "") === cleanUserId
+    );
+
+    if (!user) {
+        throw new Error("User not found");
+    }
+
+    return user;
 }
 
 async function updateSupabaseUser(userId, data) {
