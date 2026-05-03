@@ -55,21 +55,20 @@ async function getSupabaseUser(userId) {
     const { data, error } = await supabaseClient
         .from('users')
         .select('*')
-        .eq('id', userId)
-        .single();
+        .eq('id', userId);
 
     if (error) {
-        if (error.code === 'PGRST116') {
-            // PGRST116: JSON object requested, multiple (or no) rows returned
-            console.warn("No user found in Supabase for ID:", userId);
-            return null;
-        }
         console.error("Supabase Error:", error);
         throw error;
     }
 
-    console.log("Supabase response data:", data);
-    return data;
+    if (!data || data.length === 0) {
+        console.warn("No user found in Supabase for ID:", userId);
+        throw new Error("User not found");
+    }
+
+    console.log("Supabase response data:", data[0]);
+    return data[0];
 }
 
 async function updateSupabaseUser(userId, data) {
