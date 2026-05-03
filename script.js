@@ -2,7 +2,8 @@
 const SUPABASE_URL = "https://vdfjrltecvvpklybuehq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_mPXtNX0OXITxkY1v_OCq2g_Hs3lijxt";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Use 'var' instead of 'const' to prevent global naming collision with the CDN's window.supabase
+var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Mock Database
 const defaultUsers = {
