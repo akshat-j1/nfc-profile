@@ -36,7 +36,7 @@ async function getSupabaseUser(userId) {
         .from('users')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
     if (error || !data) {
         throw new Error("User not found");
