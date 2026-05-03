@@ -112,29 +112,7 @@ END:VCARD`;
 
 // --- PAGE CONTROLLERS ---
 
-async function initProfilePage() {
-    const userId = getUserId();
-    const loadingEl = document.getElementById('loading');
-    const profileEl = document.getElementById('profile-card');
-    const errorEl = document.getElementById('error-message');
-
-    if (!userId) {
-        loadingEl.style.display = 'none';
-        errorEl.textContent = 'Invalid link. No user ID provided.';
-        errorEl.style.display = 'block';
-        return;
-    }
-
-    const user = await getUser(userId);
-
-    if (!user) {
-        loadingEl.style.display = 'none';
-        errorEl.textContent = 'User not found.';
-        errorEl.style.display = 'block';
-        return;
-    }
-
-    // Handle Main Action Routing
+function handleUser(user) {
     if (user.mainAction === 'linkedin' && user.linkedin) {
         window.location.href = user.linkedin;
         return;
@@ -146,8 +124,7 @@ async function initProfilePage() {
     }
 
     // Otherwise show profile
-    // Show profile (if mainAction is 'profile' or fallback from tel)
-    document.getElementById('display-name').textContent = user.name;
+    document.getElementById('display-name').textContent = user.name || '';
 
     // Setup action buttons
     const callBtn = document.getElementById('btn-call');
@@ -156,21 +133,48 @@ async function initProfilePage() {
 
     if (user.phone) {
         callBtn.href = `tel:${user.phone}`;
+        callBtn.style.display = 'inline-flex';
     } else {
         callBtn.style.display = 'none';
     }
 
     if (user.linkedin) {
         linkedinBtn.href = user.linkedin;
+        linkedinBtn.style.display = 'inline-flex';
     } else {
         linkedinBtn.style.display = 'none';
     }
 
-    saveBtn.addEventListener('click', () => downloadVCF(user));
+    // Ensure we don't attach multiple event listeners if this runs more than once
+    const newSaveBtn = saveBtn.cloneNode(true);
+    saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
+    newSaveBtn.addEventListener('click', () => downloadVCF(user));
 
     // Show UI
-    loadingEl.style.display = 'none';
-    profileEl.style.display = 'flex';
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('profile-card').style.display = 'flex';
+}
+
+function initProfilePage() {
+    const userId = getUserId();
+    const loadingEl = document.getElementById('loading');
+    const errorEl = document.getElementById('error-message');
+
+    if (!userId) {
+        loadingEl.style.display = 'none';
+        errorEl.textContent = 'Invalid link. No user ID provided.';
+        errorEl.style.display = 'block';
+        // For Promise handling in index.html
+        return Promise.resolve();
+    }
+
+    return getSupabaseUser(userId).then(user => {
+        handleUser(user);
+    }).catch(() => {
+        loadingEl.style.display = 'none';
+        errorEl.textContent = 'User not found.';
+        errorEl.style.display = 'block';
+    });
 }
 
 function initEditPage() {
