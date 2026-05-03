@@ -57,14 +57,17 @@ END:VCARD`;
 // --- SUPABASE API ---
 
 async function getSupabaseUser(userId) {
-    console.log("Fetching userId:", userId);
+    console.log("Fetching ALL users from Supabase");
     
     const { data, error } = await supabaseClient
         .from("users")
-        .select("*")
-        .eq("id", userId);
+        .select("*");
 
-    console.log("Supabase response:", data, error);
+    console.log("Response:", data, error);
+    
+    if (data && data.length > 0) {
+        console.log("First user:", data[0]);
+    }
 
     if (error) {
         console.error("Supabase Error:", error);
