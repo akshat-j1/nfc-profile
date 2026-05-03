@@ -12,74 +12,6 @@ const supabaseClient = window.supabase.createClient(
   }
 );
 
-// Mock Database
-const defaultUsers = {
-    user1: {
-        name: "Rahul",
-        phone: "9876543210",
-        linkedin: "https://linkedin.com/in/rahul",
-        mainAction: "linkedin"
-    },
-    user2: {
-        name: "Amit",
-        phone: "9999999999",
-        linkedin: "https://linkedin.com/in/amit",
-        mainAction: "profile"
-    }
-};
-
-// --- DATA ACCESS LAYER (Ready for Supabase) ---
-
-// Initialize localStorage if empty
-function initDB() {
-    if (!localStorage.getItem('nfc_users')) {
-        localStorage.setItem('nfc_users', JSON.stringify(defaultUsers));
-    }
-}
-
-// --- SUPABASE FETCH FUNCTION (NOT USED YET) ---
-async function getSupabaseUser(userId) {
-    const { data, error } = await supabaseClient
-        .from('users')
-        .select('*')
-        .eq('id', userId)
-        .maybeSingle();
-
-    if (error || !data) {
-        throw new Error("User not found");
-    }
-
-    return data;
-}
-
-// Get user by ID
-async function getUser(id) {
-    // Supabase implementation later:
-    // const { data, error } = await supabase.from('users').select('*').eq('id', id).single();
-    // return data;
-
-    // Local mock implementation:
-    initDB();
-    const users = JSON.parse(localStorage.getItem('nfc_users'));
-    return users[id] || null;
-}
-
-// Update user by ID
-async function updateUser(id, data) {
-    // Supabase implementation later:
-    // const { error } = await supabase.from('users').update(data).eq('id', id);
-
-    // Local mock implementation:
-    initDB();
-    const users = JSON.parse(localStorage.getItem('nfc_users'));
-    if (users[id]) {
-        users[id] = { ...users[id], ...data };
-        localStorage.setItem('nfc_users', JSON.stringify(users));
-        return true;
-    }
-    return false;
-}
-
 // --- CORE UTILS ---
 
 // Extract userId from URL
@@ -88,12 +20,11 @@ function getUserId() {
 
     // Handle clean URL: /u/user1
     if (path.startsWith('/u/')) {
-        return path.split('/u/')[1];
+        const id = path.split('/u/')[1];
+        if (id) return id.replace(/\/$/, ""); // Remove trailing slash if any
     }
 
     const params = new URLSearchParams(window.location.search);
-
-    // Support both ?u=user1 and ?user=user1
     return params.get('u') || params.get('user');
 }
 
@@ -101,35 +32,78 @@ function getUserId() {
 function downloadVCF(user) {
     const vcfData = `BEGIN:VCARD
 VERSION:3.0
-FN:${user.name}
-TEL;TYPE=CELL:${user.phone}
-URL:${user.linkedin}
+FN:${user.name || ''}
+TEL;TYPE=CELL:${user.phone || ''}
+URL:${user.linkedin || ''}
 END:VCARD`;
 
     const blob = new Blob([vcfData], { type: 'text/vcard' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${user.name.replace(/\s+/g, '_')}_contact.vcf`;
+    a.download = `${(user.name || 'contact').replace(/\s+/g, '_')}.vcf`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
 
+// --- SUPABASE API ---
+
+async function getSupabaseUser(userId) {
+    console.log("Fetching user from Supabase:", userId);
+    const { data, error } = await supabaseClient
+        .from('users')
+        .select('*')
+        .eq('id', userId)
+        .single();
+
+    if (error) {
+        if (error.code === 'PGRST116') {
+            // PGRST116: JSON object requested, multiple (or no) rows returned
+            console.warn("No user found in Supabase for ID:", userId);
+            return null;
+        }
+        console.error("Supabase Error:", error);
+        throw error;
+    }
+
+    console.log("Supabase response data:", data);
+    return data;
+}
+
+async function updateSupabaseUser(userId, data) {
+    console.log("Updating user in Supabase:", userId, data);
+    const { error } = await supabaseClient
+        .from('users')
+        .update(data)
+        .eq('id', userId);
+
+    if (error) {
+        console.error("Supabase Update Error:", error);
+        throw error;
+    }
+    return true;
+}
+
 // --- PAGE CONTROLLERS ---
 
 function handleUser(user) {
+    console.log("Handling user action:", user.mainAction);
+    
     if (user.mainAction === 'linkedin' && user.linkedin) {
+        console.log("Redirecting to LinkedIn:", user.linkedin);
         window.location.href = user.linkedin;
         return;
     }
 
     if (user.mainAction === 'phone' && user.phone) {
+        console.log("Redirecting to Phone Dialer:", user.phone);
         window.location.href = `tel:${user.phone}`;
         return;
     }
 
+    console.log("Showing Profile UI");
     // Otherwise show profile
     document.getElementById('display-name').textContent = user.name || '';
 
@@ -152,7 +126,7 @@ function handleUser(user) {
         linkedinBtn.style.display = 'none';
     }
 
-    // Ensure we don't attach multiple event listeners if this runs more than once
+    // Ensure we don't attach multiple event listeners
     const newSaveBtn = saveBtn.cloneNode(true);
     saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
     newSaveBtn.addEventListener('click', () => downloadVCF(user));
@@ -162,68 +136,96 @@ function handleUser(user) {
     document.getElementById('profile-card').style.display = 'flex';
 }
 
-function initProfilePage() {
+async function initProfilePage() {
     const userId = getUserId();
+    console.log("initProfilePage - Extracted userId:", userId);
+    
     const loadingEl = document.getElementById('loading');
     const errorEl = document.getElementById('error-message');
 
     if (!userId) {
+        console.warn("Invalid link. No user ID provided.");
         loadingEl.style.display = 'none';
         errorEl.textContent = 'Invalid link. No user ID provided.';
         errorEl.style.display = 'block';
-        // For Promise handling in index.html
-        return Promise.resolve();
+        return;
     }
 
-    return getSupabaseUser(userId).then(user => {
+    try {
+        const user = await getSupabaseUser(userId);
+        if (!user) {
+            loadingEl.style.display = 'none';
+            errorEl.textContent = 'User not found.';
+            errorEl.style.display = 'block';
+            return;
+        }
         handleUser(user);
-    }).catch(() => {
+    } catch (err) {
+        console.error("Error in initProfilePage:", err);
         loadingEl.style.display = 'none';
         errorEl.textContent = 'User not found.';
         errorEl.style.display = 'block';
-    });
+    }
 }
 
-function initEditPage() {
+async function initEditPage() {
     const userId = getUserId();
+    console.log("initEditPage - Extracted userId:", userId);
 
     if (!userId) {
         alert("No user identified to change");
-        throw new Error("User ID missing");
+        return;
     }
 
-    // LOAD user from localStorage safely
-    const users = JSON.parse(localStorage.getItem('nfc_users')) || {};
-    const user = users[userId];
+    try {
+        const user = await getSupabaseUser(userId);
+        if (!user) {
+            alert("User not found");
+            return;
+        }
 
-    if (!user) {
-        alert("User not found");
-        throw new Error("Invalid user");
+        console.log("Populating edit form for user:", user);
+
+        // POPULATE form fields
+        document.getElementById('edit-userId').textContent = userId;
+        document.getElementById('name').value = user.name || '';
+        document.getElementById('phone').value = user.phone || '';
+        document.getElementById('linkedin').value = user.linkedin || '';
+        document.getElementById('mainAction').value = user.mainAction || 'profile';
+
+        // UPDATE save logic
+        document.getElementById('edit-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Saving...';
+            submitBtn.disabled = true;
+
+            const newData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                linkedin: document.getElementById('linkedin').value,
+                mainAction: document.getElementById('mainAction').value
+            };
+
+            try {
+                await updateSupabaseUser(userId, newData);
+                alert("Saved successfully!");
+                window.location.href = `/u/${userId}`;
+            } catch (updateErr) {
+                console.error("Error saving profile:", updateErr);
+                alert("Failed to save profile. Please try again.");
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    } catch (err) {
+        console.error("Error in initEditPage:", err);
+        alert("User not found or database error.");
     }
-
-    // POPULATE form fields
-    document.getElementById('edit-userId').textContent = userId;
-    document.getElementById('name').value = user.name || '';
-    document.getElementById('phone').value = user.phone || '';
-    document.getElementById('linkedin').value = user.linkedin || '';
-    document.getElementById('mainAction').value = user.mainAction || 'profile';
-
-    // UPDATE save logic
-    document.getElementById('edit-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        users[userId] = {
-            name: document.getElementById('name').value,
-            phone: document.getElementById('phone').value,
-            linkedin: document.getElementById('linkedin').value,
-            mainAction: document.getElementById('mainAction').value
-        };
-
-        localStorage.setItem('nfc_users', JSON.stringify(users));
-
-        alert("Saved successfully!");
-
-        // Optional: redirect to test NFC behavior
-        window.location.href = `/u/${userId}`;
-    });
 }
+
+// Make functions globally accessible
+window.initProfilePage = initProfilePage;
+window.initEditPage = initEditPage;
