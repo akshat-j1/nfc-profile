@@ -1,6 +1,6 @@
 // script.js
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+const SUPABASE_URL = "https://vdfjrltecvvpklybuehq.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_mPXtNX0OXITxkY1v_OCq2g_Hs3lijxt";
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -31,17 +31,17 @@ function initDB() {
 
 // --- SUPABASE FETCH FUNCTION (NOT USED YET) ---
 async function getSupabaseUser(userId) {
-  const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', userId)
-    .single();
+    const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-  if (error || !data) {
-    throw new Error("User not found");
-  }
+    if (error || !data) {
+        throw new Error("User not found");
+    }
 
-  return data;
+    return data;
 }
 
 // Get user by ID
@@ -49,7 +49,7 @@ async function getUser(id) {
     // Supabase implementation later:
     // const { data, error } = await supabase.from('users').select('*').eq('id', id).single();
     // return data;
-    
+
     // Local mock implementation:
     initDB();
     const users = JSON.parse(localStorage.getItem('nfc_users'));
@@ -60,7 +60,7 @@ async function getUser(id) {
 async function updateUser(id, data) {
     // Supabase implementation later:
     // const { error } = await supabase.from('users').update(data).eq('id', id);
-    
+
     // Local mock implementation:
     initDB();
     const users = JSON.parse(localStorage.getItem('nfc_users'));
@@ -76,17 +76,17 @@ async function updateUser(id, data) {
 
 // Extract userId from URL
 function getUserId() {
-  const path = window.location.pathname;
+    const path = window.location.pathname;
 
-  // Handle clean URL: /u/user1
-  if (path.startsWith('/u/')) {
-    return path.split('/u/')[1];
-  }
+    // Handle clean URL: /u/user1
+    if (path.startsWith('/u/')) {
+        return path.split('/u/')[1];
+    }
 
-  const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search);
 
-  // Support both ?u=user1 and ?user=user1
-  return params.get('u') || params.get('user');
+    // Support both ?u=user1 and ?user=user1
+    return params.get('u') || params.get('user');
 }
 
 // Generate and download VCF
@@ -147,7 +147,7 @@ async function initProfilePage() {
     // Otherwise show profile
     // Show profile (if mainAction is 'profile' or fallback from tel)
     document.getElementById('display-name').textContent = user.name;
-    
+
     // Setup action buttons
     const callBtn = document.getElementById('btn-call');
     const linkedinBtn = document.getElementById('btn-linkedin');
@@ -199,7 +199,7 @@ function initEditPage() {
     // UPDATE save logic
     document.getElementById('edit-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         users[userId] = {
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
