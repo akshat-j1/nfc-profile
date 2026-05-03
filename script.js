@@ -17,15 +17,21 @@ const supabaseClient = window.supabase.createClient(
 // Extract userId from URL
 function getUserId() {
     const path = window.location.pathname;
+    let id = null;
 
     // Handle clean URL: /u/user1
     if (path.startsWith('/u/')) {
-        const id = path.split('/u/')[1];
-        if (id) return id.replace(/\/$/, ""); // Remove trailing slash if any
+        id = path.split('/u/')[1];
+        if (id) id = id.replace(/\/$/, ""); // Remove trailing slash if any
     }
 
-    const params = new URLSearchParams(window.location.search);
-    return params.get('u') || params.get('user');
+    if (!id) {
+        const params = new URLSearchParams(window.location.search);
+        id = params.get('u') || params.get('user');
+    }
+
+    // Return decoded and trimmed ID to prevent whitespace/encoding mismatches
+    return id ? decodeURIComponent(id).trim() : null;
 }
 
 // Generate and download VCF
@@ -51,11 +57,14 @@ END:VCARD`;
 // --- SUPABASE API ---
 
 async function getSupabaseUser(userId) {
-    console.log("Fetching user from Supabase:", userId);
+    console.log("Fetching userId:", userId);
+    
     const { data, error } = await supabaseClient
-        .from('users')
-        .select('*')
-        .eq('id', userId);
+        .from("users")
+        .select("*")
+        .eq("id", userId);
+
+    console.log("Supabase response:", data, error);
 
     if (error) {
         console.error("Supabase Error:", error);
@@ -63,11 +72,9 @@ async function getSupabaseUser(userId) {
     }
 
     if (!data || data.length === 0) {
-        console.warn("No user found in Supabase for ID:", userId);
         throw new Error("User not found");
     }
 
-    console.log("Supabase response data:", data[0]);
     return data[0];
 }
 
