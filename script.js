@@ -56,16 +56,17 @@ async function updateUser(id, data) {
 
 // Extract userId from URL
 function getUserId() {
-    const path = window.location.pathname;
+  const path = window.location.pathname;
 
-    // Handle /u/user1
-    if (path.startsWith('/u/')) {
-        return path.split('/u/')[1];
-    }
+  // Handle clean URL: /u/user1
+  if (path.startsWith('/u/')) {
+    return path.split('/u/')[1];
+  }
 
-    // Fallback ?u=user1
-    const params = new URLSearchParams(window.location.search);
-    return params.get('u');
+  const params = new URLSearchParams(window.location.search);
+
+  // Support both ?u=user1 and ?user=user1
+  return params.get('u') || params.get('user');
 }
 
 // Generate and download VCF
@@ -151,44 +152,46 @@ async function initProfilePage() {
     profileEl.style.display = 'flex';
 }
 
-async function initEditPage() {
+function initEditPage() {
     const userId = getUserId();
+
     if (!userId) {
-        alert("No user specified to edit. Use ?user=user1 in URL.");
-        return;
+        alert("No user identified to change");
+        throw new Error("User ID missing");
     }
 
-    const user = await getUser(userId);
+    // LOAD user from localStorage safely
+    const users = JSON.parse(localStorage.getItem('nfc_users')) || {};
+    const user = users[userId];
+
     if (!user) {
-        alert("User not found!");
-        return;
+        alert("User not found");
+        throw new Error("Invalid user");
     }
 
-    // Populate form
+    // POPULATE form fields
     document.getElementById('edit-userId').textContent = userId;
-    document.getElementById('input-name').value = user.name || '';
-    document.getElementById('input-phone').value = user.phone || '';
-    document.getElementById('input-linkedin').value = user.linkedin || '';
-    document.getElementById('select-action').value = user.mainAction || 'profile';
+    document.getElementById('name').value = user.name || '';
+    document.getElementById('phone').value = user.phone || '';
+    document.getElementById('linkedin').value = user.linkedin || '';
+    document.getElementById('mainAction').value = user.mainAction || 'profile';
 
-    // Handle save
-    document.getElementById('edit-form').addEventListener('submit', async (e) => {
+    // UPDATE save logic
+    document.getElementById('edit-form').addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const newData = {
-            name: document.getElementById('input-name').value,
-            phone: document.getElementById('input-phone').value,
-            linkedin: document.getElementById('input-linkedin').value,
-            mainAction: document.getElementById('select-action').value
+        users[userId] = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            linkedin: document.getElementById('linkedin').value,
+            mainAction: document.getElementById('mainAction').value
         };
 
-        const success = await updateUser(userId, newData);
-        if (success) {
-            alert('Profile updated successfully!');
-            // Optional: redirect to profile
-            // window.location.href = `index.html?u=${userId}`;
-        } else {
-            alert('Error updating profile.');
-        }
+        localStorage.setItem('nfc_users', JSON.stringify(users));
+
+        alert("Saved successfully!");
+
+        // Optional: redirect to test NFC behavior
+        window.location.href = `/u/${userId}`;
     });
 }
