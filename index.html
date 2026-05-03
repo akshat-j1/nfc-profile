@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Profile</title>
+    <!-- Modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Loading State -->
+    <div id="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading profile...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-message" class="error-state" style="display: none; color: #ef4444; font-weight: 500;">
+        User not found.
+    </div>
+
+    <!-- Profile Card -->
+    <main id="profile-card" class="card-container">
+        <div class="avatar-placeholder">
+            <span id="avatar-initial"></span>
+        </div>
+        
+        <h1 id="display-name" class="profile-name"></h1>
+        <p class="profile-title">Tap to connect</p>
+
+        <div class="action-buttons">
+            <a id="btn-call" href="#" class="btn btn-secondary">
+                <span class="btn-icon">📞</span> Call
+            </a>
+            <a id="btn-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <span class="btn-icon">💼</span> LinkedIn
+            </a>
+            <button id="btn-save" class="btn btn-primary">
+                <span class="btn-icon">📥</span> Save Contact
+            </button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize the profile page on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initProfilePage().then(() => {
+                // Update avatar initial after profile loads
+                const nameStr = document.getElementById('display-name').textContent;
+                if (nameStr) {
+                    document.getElementById('avatar-initial').textContent = nameStr.charAt(0).toUpperCase();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

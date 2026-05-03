@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit NFC Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="card-container" style="display: flex;">
+        <div class="edit-header">
+            <h1 class="profile-name">Edit Profile</h1>
+            <p class="profile-title">Editing user: <strong id="edit-userId">...</strong></p>
+        </div>
+
+        <form id="edit-form" style="width: 100%;">
+            <div class="form-group">
+                <label for="input-name">Full Name</label>
+                <input type="text" id="input-name" class="form-control" required placeholder="e.g. Rahul Sharma">
+            </div>
+
+            <div class="form-group">
+                <label for="input-phone">Phone Number</label>
+                <input type="tel" id="input-phone" class="form-control" required placeholder="e.g. 9876543210">
+            </div>
+
+            <div class="form-group">
+                <label for="input-linkedin">LinkedIn URL</label>
+                <input type="url" id="input-linkedin" class="form-control" placeholder="https://linkedin.com/in/username">
+            </div>
+
+            <div class="form-group">
+                <label for="select-action">On Tap Action</label>
+                <select id="select-action" class="form-control" required>
+                    <option value="profile">Show Profile Page</option>
+                    <option value="linkedin">Open LinkedIn Directly</option>
+                    <option value="phone">Open Phone Dialer</option>
+                </select>
+            </div>
+
+            <div class="action-buttons" style="margin-top: 24px;">
+                <button type="submit" class="btn btn-primary">
+                    💾 Save Changes
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize the edit page on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initEditPage();
+        });
+    </script>
+</body>
+</html>
