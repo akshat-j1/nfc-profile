@@ -2,8 +2,15 @@
 const SUPABASE_URL = "https://vdfjrltecvvpklybuehq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_mPXtNX0OXITxkY1v_OCq2g_Hs3lijxt";
 
-// Use 'var' instead of 'const' to prevent global naming collision with the CDN's window.supabase
-var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY,
+  {
+    auth: {
+      persistSession: false
+    }
+  }
+);
 
 // Mock Database
 const defaultUsers = {
@@ -32,7 +39,7 @@ function initDB() {
 
 // --- SUPABASE FETCH FUNCTION (NOT USED YET) ---
 async function getSupabaseUser(userId) {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from('users')
         .select('*')
         .eq('id', userId)
