@@ -63,7 +63,7 @@ function getUserId() {
         return path.split('/u/')[1];
     }
 
-    // Handle ?u=user1
+    // Fallback ?u=user1
     const params = new URLSearchParams(window.location.search);
     return params.get('u');
 }
