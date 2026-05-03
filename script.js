@@ -1,4 +1,9 @@
 // script.js
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 // Mock Database
 const defaultUsers = {
     user1: {
@@ -22,6 +27,21 @@ function initDB() {
     if (!localStorage.getItem('nfc_users')) {
         localStorage.setItem('nfc_users', JSON.stringify(defaultUsers));
     }
+}
+
+// --- SUPABASE FETCH FUNCTION (NOT USED YET) ---
+async function getSupabaseUser(userId) {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error || !data) {
+    throw new Error("User not found");
+  }
+
+  return data;
 }
 
 // Get user by ID
