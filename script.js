@@ -127,7 +127,6 @@ async function initProfilePage() {
     }
 
     // Otherwise show profile
-
     // Show profile (if mainAction is 'profile' or fallback from tel)
     document.getElementById('display-name').textContent = user.name;
     
