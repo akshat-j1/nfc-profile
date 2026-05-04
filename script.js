@@ -209,7 +209,11 @@ async function initEditPage() {
         document.getElementById('mainAction').value = user.mainAction || 'profile';
 
         if (userId === "demo") {
-            document.querySelectorAll("input, select").forEach(el => el.disabled = true);
+            document.querySelectorAll("#edit-form input, #edit-form select").forEach(el => {
+                el.disabled = true;
+                el.style.cursor = "not-allowed";
+                el.style.opacity = "0.7";
+            });
 
             const saveBtn = document.querySelector("#edit-form button[type='submit']");
             if (saveBtn) saveBtn.disabled = true;
@@ -290,6 +294,14 @@ async function initEditPage() {
         unlockBtn.disabled = true;
         authError.style.display = 'none';
 
+        if (userId === "demo" && enteredPassword !== "1234") {
+            authError.textContent = "Incorrect password";
+            authError.style.display = 'block';
+            unlockBtn.innerHTML = originalText;
+            unlockBtn.disabled = false;
+            return;
+        }
+
         try {
             const user = await getSupabaseUser(userId);
             if (!user) {
@@ -300,7 +312,7 @@ async function initEditPage() {
                 return;
             }
 
-            if (user.password !== enteredPassword) {
+            if (userId !== "demo" && user.password !== enteredPassword) {
                 authError.textContent = "Incorrect password";
                 authError.style.display = 'block';
                 unlockBtn.innerHTML = originalText;
