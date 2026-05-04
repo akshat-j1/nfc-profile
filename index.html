@@ -22,43 +22,72 @@
     </div>
 
     <!-- Landing Page -->
-    <div id="landing-page" class="landing-container" style="display: none;">
-        <header class="hero-section">
-            <h1 class="hero-title">Smart NFC Profile Cards</h1>
-            <p class="hero-subtitle">Tap. Connect. Share instantly.</p>
-            <div class="hero-buttons">
-                <a href="/u/demo" class="btn btn-primary">View Demo Profile</a>
-                <a href="/edit.html?u=demo" class="btn btn-secondary">Edit Demo Profile</a>
-            </div>
-        </header>
+    <div id="landing-page" style="display: none;">
+        <div class="landing-content">
+            <header class="lp-hero">
+                <h1 class="lp-title">Your digital identity in one tap</h1>
+                <p class="lp-subtitle">Tap your NFC card and connect instantly</p>
+                <div class="lp-buttons">
+                    <a href="/u/demo" class="btn btn-primary">View Demo</a>
+                    <a href="/edit.html?u=demo" class="btn btn-outline">Edit Demo</a>
+                </div>
+            </header>
 
-        <section class="how-it-works">
-            <div class="step-card">
-                <div class="step-icon">📱</div>
-                <h3>Tap your NFC card</h3>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">✨</div>
-                <h3>Open your digital profile</h3>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">🤝</div>
-                <h3>Save contact or connect instantly</h3>
-            </div>
-        </section>
+            <section class="lp-section">
+                <h2 class="lp-section-title">Tap in Style</h2>
+                <div class="lp-card-showcase">
+                    <div class="lp-nfc-card matte-black">Matte Black</div>
+                    <div class="lp-nfc-card gradient-card">Gradient</div>
+                    <div class="lp-nfc-card minimal-card">Minimal</div>
+                    <div class="lp-nfc-card creator-card">Creator</div>
+                </div>
+            </section>
 
-        <section class="features">
-            <ul class="feature-list">
-                <li><span class="check-icon">✓</span> No app required</li>
-                <li><span class="check-icon">✓</span> Works on all phones</li>
-                <li><span class="check-icon">✓</span> Instant sharing</li>
-                <li><span class="check-icon">✓</span> Editable anytime</li>
-            </ul>
-        </section>
+            <section class="lp-section">
+                <h2 class="lp-section-title">How It Works</h2>
+                <div class="lp-steps">
+                    <div class="lp-step">
+                        <div class="lp-icon">📱</div>
+                        <h3>Tap NFC card</h3>
+                    </div>
+                    <div class="lp-step">
+                        <div class="lp-icon">✨</div>
+                        <h3>Open profile</h3>
+                    </div>
+                    <div class="lp-step">
+                        <div class="lp-icon">🤝</div>
+                        <h3>Connect instantly</h3>
+                    </div>
+                </div>
+            </section>
 
-        <footer class="landing-footer">
-            Built with Supabase + Vercel
-        </footer>
+            <section class="lp-section">
+                <h2 class="lp-section-title">Features</h2>
+                <div class="lp-features-grid">
+                    <div class="lp-feature">
+                        <span class="lp-check">✓</span> No app required
+                    </div>
+                    <div class="lp-feature">
+                        <span class="lp-check">✓</span> Works on all phones
+                    </div>
+                    <div class="lp-feature">
+                        <span class="lp-check">✓</span> Instant sharing
+                    </div>
+                    <div class="lp-feature">
+                        <span class="lp-check">✓</span> Editable anytime
+                    </div>
+                </div>
+            </section>
+
+            <section class="lp-cta">
+                <h2>Get your NFC card</h2>
+                <a href="#" class="btn btn-primary lp-cta-btn">Create your profile</a>
+            </section>
+
+            <footer class="lp-footer">
+                Built with Supabase + Vercel
+            </footer>
+        </div>
     </div>
 
     <!-- Profile Card -->
