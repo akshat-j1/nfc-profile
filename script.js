@@ -191,7 +191,89 @@ async function initEditPage() {
     const passwordInput = document.getElementById('passwordInput');
     const unlockBtn = document.getElementById('unlockBtn');
     const authError = document.getElementById('authError');
+    const header = document.querySelector('.edit-header');
 
+    // 2. DEMO USER BYPASS
+    if (userId === "demo") {
+        if (authBox) authBox.style.display = 'none';
+        if (editForm) editForm.style.display = 'none';
+        
+        const msg = document.createElement('p');
+        msg.style.color = '#ef4444';
+        msg.style.fontWeight = '500';
+        msg.style.marginTop = '12px';
+        msg.textContent = "Demo profile cannot be edited";
+        if (header) header.appendChild(msg);
+        return;
+    }
+
+    const accessKey = "editAccess_" + userId;
+
+    // Helper to setup the form once user is authenticated
+    const setupFormForUser = (user) => {
+        authBox.style.display = 'none';
+        editForm.style.display = 'block';
+
+        console.log("Populating edit form for user:", user);
+
+        // POPULATE form fields
+        document.getElementById('name').value = user.name || '';
+        document.getElementById('phone').value = user.phone || '';
+        document.getElementById('linkedin').value = user.linkedin || '';
+        document.getElementById('mainAction').value = user.mainAction || 'profile';
+
+        // UPDATE save logic
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const mainAction = document.getElementById('mainAction').value;
+
+            const submitBtn = editForm.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Saving...';
+                submitBtn.disabled = true;
+                
+                await updateSupabaseUser(userId, {
+                    name,
+                    phone,
+                    linkedin,
+                    mainAction
+                });
+
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            } else {
+                await updateSupabaseUser(userId, {
+                    name,
+                    phone,
+                    linkedin,
+                    mainAction
+                });
+            }
+        });
+    };
+
+    // 3. SESSION CHECK
+    if (sessionStorage.getItem(accessKey) === "true") {
+        try {
+            const user = await getSupabaseUser(userId);
+            if (!user) {
+                alert("User not found");
+                return;
+            }
+            setupFormForUser(user);
+        } catch (err) {
+            console.error("Error fetching user:", err);
+            alert("Database error fetching profile.");
+        }
+        return;
+    }
+
+    // 4. PASSWORD FLOW
     unlockBtn.addEventListener('click', async () => {
         const enteredPassword = passwordInput.value.trim();
         
@@ -225,50 +307,8 @@ async function initEditPage() {
             }
 
             // Password correct!
-            authBox.style.display = 'none';
-            editForm.style.display = 'block';
-
-            console.log("Populating edit form for user:", user);
-
-            // POPULATE form fields
-            document.getElementById('name').value = user.name || '';
-            document.getElementById('phone').value = user.phone || '';
-            document.getElementById('linkedin').value = user.linkedin || '';
-            document.getElementById('mainAction').value = user.mainAction || 'profile';
-
-            if (userId === "demo") {
-                document.getElementById('name').disabled = true;
-                document.getElementById('phone').disabled = true;
-                document.getElementById('linkedin').disabled = true;
-                document.getElementById('mainAction').disabled = true;
-                const submitBtn = document.getElementById('edit-form').querySelector('button[type="submit"]');
-                if (submitBtn) submitBtn.disabled = true;
-                
-                const msg = document.createElement('p');
-                msg.style.color = '#ef4444';
-                msg.style.fontWeight = '500';
-                msg.style.marginTop = '12px';
-                msg.textContent = "Demo profile cannot be edited";
-                const header = document.querySelector('.edit-header');
-                if (header) header.appendChild(msg);
-            }
-
-            // UPDATE save logic
-            editForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
-                const linkedin = document.getElementById('linkedin').value;
-                const mainAction = document.getElementById('mainAction').value;
-
-                await updateSupabaseUser(userId, {
-                    name,
-                    phone,
-                    linkedin,
-                    mainAction
-                });
-            });
+            sessionStorage.setItem(accessKey, "true");
+            setupFormForUser(user);
 
         } catch (err) {
             console.error("Error fetching user for auth:", err);
