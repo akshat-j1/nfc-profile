@@ -281,7 +281,9 @@ async function initEditPage() {
 
     // 4. PASSWORD FLOW
     unlockBtn.addEventListener('click', async () => {
+        const currentUserId = getUserId();
         const enteredPassword = passwordInput.value.trim();
+        console.log("Entered:", enteredPassword);
         
         if (!enteredPassword) {
             authError.textContent = "Please enter a password";
@@ -294,16 +296,40 @@ async function initEditPage() {
         unlockBtn.disabled = true;
         authError.style.display = 'none';
 
-        if (userId === "demo" && enteredPassword !== "1234") {
-            authError.textContent = "Incorrect password";
-            authError.style.display = 'block';
-            unlockBtn.innerHTML = originalText;
-            unlockBtn.disabled = false;
+        if (currentUserId === "demo") {
+            if (enteredPassword !== "1234") {
+                authError.textContent = "Incorrect password";
+                authError.style.display = 'block';
+                unlockBtn.innerHTML = originalText;
+                unlockBtn.disabled = false;
+                return;
+            }
+
+            try {
+                const user = await getSupabaseUser(currentUserId);
+                if (!user) {
+                    authError.textContent = "Failed to load demo";
+                    authError.style.display = 'block';
+                    unlockBtn.innerHTML = originalText;
+                    unlockBtn.disabled = false;
+                    return;
+                }
+                
+                sessionStorage.setItem(accessKey, "true");
+                setupFormForUser(user);
+            } catch (err) {
+                console.error("Error fetching demo user:", err);
+                authError.textContent = "Failed to load demo";
+                authError.style.display = 'block';
+                unlockBtn.innerHTML = originalText;
+                unlockBtn.disabled = false;
+            }
             return;
         }
 
+        // Normal user logic
         try {
-            const user = await getSupabaseUser(userId);
+            const user = await getSupabaseUser(currentUserId);
             if (!user) {
                 authError.textContent = "User not found";
                 authError.style.display = 'block';
@@ -312,7 +338,7 @@ async function initEditPage() {
                 return;
             }
 
-            if (userId !== "demo" && user.password !== enteredPassword) {
+            if (user.password !== enteredPassword) {
                 authError.textContent = "Incorrect password";
                 authError.style.display = 'block';
                 unlockBtn.innerHTML = originalText;
