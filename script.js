@@ -193,20 +193,6 @@ async function initEditPage() {
     const authError = document.getElementById('authError');
     const header = document.querySelector('.edit-header');
 
-    // 2. DEMO USER BYPASS
-    if (userId === "demo") {
-        if (authBox) authBox.style.display = 'none';
-        if (editForm) editForm.style.display = 'none';
-        
-        const msg = document.createElement('p');
-        msg.style.color = '#ef4444';
-        msg.style.fontWeight = '500';
-        msg.style.marginTop = '12px';
-        msg.textContent = "Demo profile cannot be edited";
-        if (header) header.appendChild(msg);
-        return;
-    }
-
     const accessKey = "editAccess_" + userId;
 
     // Helper to setup the form once user is authenticated
@@ -221,6 +207,22 @@ async function initEditPage() {
         document.getElementById('phone').value = user.phone || '';
         document.getElementById('linkedin').value = user.linkedin || '';
         document.getElementById('mainAction').value = user.mainAction || 'profile';
+
+        if (userId === "demo") {
+            document.querySelectorAll("input, select").forEach(el => el.disabled = true);
+
+            const saveBtn = document.querySelector("#edit-form button[type='submit']");
+            if (saveBtn) saveBtn.disabled = true;
+
+            const warning = document.createElement("p");
+            warning.innerText = "Demo profile cannot be edited";
+            warning.style.color = "red";
+            warning.style.textAlign = "center";
+            warning.style.marginTop = "10px";
+
+            const header = document.querySelector('.edit-header');
+            if (header) header.appendChild(warning);
+        }
 
         // UPDATE save logic
         editForm.addEventListener('submit', async (e) => {
