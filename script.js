@@ -200,6 +200,23 @@ async function initEditPage() {
         document.getElementById('linkedin').value = user.linkedin || '';
         document.getElementById('mainAction').value = user.mainAction || 'profile';
 
+        if (userId === "demo") {
+            document.getElementById('name').disabled = true;
+            document.getElementById('phone').disabled = true;
+            document.getElementById('linkedin').disabled = true;
+            document.getElementById('mainAction').disabled = true;
+            const submitBtn = document.getElementById('edit-form').querySelector('button[type="submit"]');
+            if (submitBtn) submitBtn.disabled = true;
+            
+            const msg = document.createElement('p');
+            msg.style.color = '#ef4444';
+            msg.style.fontWeight = '500';
+            msg.style.marginTop = '12px';
+            msg.textContent = "Demo profile cannot be edited";
+            const header = document.querySelector('.edit-header');
+            if (header) header.appendChild(msg);
+        }
+
         // UPDATE save logic
         document.getElementById('edit-form').addEventListener('submit', async (e) => {
             e.preventDefault();
