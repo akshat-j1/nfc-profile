@@ -184,60 +184,100 @@ async function initEditPage() {
         return;
     }
 
-    try {
-        const user = await getSupabaseUser(userId);
-        if (!user) {
-            alert("User not found");
+    document.getElementById('edit-userId').textContent = userId;
+
+    const authBox = document.getElementById('auth-box');
+    const editForm = document.getElementById('edit-form');
+    const passwordInput = document.getElementById('passwordInput');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const authError = document.getElementById('authError');
+
+    unlockBtn.addEventListener('click', async () => {
+        const enteredPassword = passwordInput.value.trim();
+        
+        if (!enteredPassword) {
+            authError.textContent = "Please enter a password";
+            authError.style.display = 'block';
             return;
         }
 
-        console.log("Populating edit form for user:", user);
+        const originalText = unlockBtn.innerHTML;
+        unlockBtn.innerHTML = 'Verifying...';
+        unlockBtn.disabled = true;
+        authError.style.display = 'none';
 
-        // POPULATE form fields
-        document.getElementById('edit-userId').textContent = userId;
-        document.getElementById('name').value = user.name || '';
-        document.getElementById('phone').value = user.phone || '';
-        document.getElementById('linkedin').value = user.linkedin || '';
-        document.getElementById('mainAction').value = user.mainAction || 'profile';
+        try {
+            const user = await getSupabaseUser(userId);
+            if (!user) {
+                authError.textContent = "User not found";
+                authError.style.display = 'block';
+                unlockBtn.innerHTML = originalText;
+                unlockBtn.disabled = false;
+                return;
+            }
 
-        if (userId === "demo") {
-            document.getElementById('name').disabled = true;
-            document.getElementById('phone').disabled = true;
-            document.getElementById('linkedin').disabled = true;
-            document.getElementById('mainAction').disabled = true;
-            const submitBtn = document.getElementById('edit-form').querySelector('button[type="submit"]');
-            if (submitBtn) submitBtn.disabled = true;
-            
-            const msg = document.createElement('p');
-            msg.style.color = '#ef4444';
-            msg.style.fontWeight = '500';
-            msg.style.marginTop = '12px';
-            msg.textContent = "Demo profile cannot be edited";
-            const header = document.querySelector('.edit-header');
-            if (header) header.appendChild(msg);
-        }
+            if (user.password !== enteredPassword) {
+                authError.textContent = "Incorrect password";
+                authError.style.display = 'block';
+                unlockBtn.innerHTML = originalText;
+                unlockBtn.disabled = false;
+                return;
+            }
 
-        // UPDATE save logic
-        document.getElementById('edit-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const userId = getUserId();
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const linkedin = document.getElementById('linkedin').value;
-            const mainAction = document.getElementById('mainAction').value;
+            // Password correct!
+            authBox.style.display = 'none';
+            editForm.style.display = 'block';
 
-            await updateSupabaseUser(userId, {
-                name,
-                phone,
-                linkedin,
-                mainAction
+            console.log("Populating edit form for user:", user);
+
+            // POPULATE form fields
+            document.getElementById('name').value = user.name || '';
+            document.getElementById('phone').value = user.phone || '';
+            document.getElementById('linkedin').value = user.linkedin || '';
+            document.getElementById('mainAction').value = user.mainAction || 'profile';
+
+            if (userId === "demo") {
+                document.getElementById('name').disabled = true;
+                document.getElementById('phone').disabled = true;
+                document.getElementById('linkedin').disabled = true;
+                document.getElementById('mainAction').disabled = true;
+                const submitBtn = document.getElementById('edit-form').querySelector('button[type="submit"]');
+                if (submitBtn) submitBtn.disabled = true;
+                
+                const msg = document.createElement('p');
+                msg.style.color = '#ef4444';
+                msg.style.fontWeight = '500';
+                msg.style.marginTop = '12px';
+                msg.textContent = "Demo profile cannot be edited";
+                const header = document.querySelector('.edit-header');
+                if (header) header.appendChild(msg);
+            }
+
+            // UPDATE save logic
+            editForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const linkedin = document.getElementById('linkedin').value;
+                const mainAction = document.getElementById('mainAction').value;
+
+                await updateSupabaseUser(userId, {
+                    name,
+                    phone,
+                    linkedin,
+                    mainAction
+                });
             });
-        });
-    } catch (err) {
-        console.error("Error in initEditPage:", err);
-        alert("User not found or database error.");
-    }
+
+        } catch (err) {
+            console.error("Error fetching user for auth:", err);
+            authError.textContent = "Error fetching user";
+            authError.style.display = 'block';
+            unlockBtn.innerHTML = originalText;
+            unlockBtn.disabled = false;
+        }
+    });
 }
 
 // Make functions globally accessible

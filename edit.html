@@ -15,7 +15,14 @@
             <p class="profile-title">Editing user: <strong id="edit-userId">...</strong></p>
         </div>
 
-        <form id="edit-form" style="width: 100%;">
+        <div id="auth-box" style="width: 100%; text-align: left; margin-bottom: 24px;">
+            <h3 style="font-size: 16px; margin-bottom: 8px;">Enter Password</h3>
+            <input type="password" id="passwordInput" class="form-control" placeholder="Enter password" style="margin-bottom: 12px;" />
+            <button id="unlockBtn" class="btn btn-primary">Unlock</button>
+            <p id="authError" style="color:#ef4444; font-weight: 500; font-size: 14px; display:none; margin-top: 12px; text-align: center;">Incorrect password</p>
+        </div>
+
+        <form id="edit-form" style="width: 100%; display: none;">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" class="form-control" required placeholder="e.g. Rahul Sharma">
