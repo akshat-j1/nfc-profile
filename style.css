@@ -307,3 +307,80 @@ select.form-control {
     color: var(--text-muted);
     font-size: 14px;
 }
+
+/* Premium Dark Profile Card Override */
+#profile-card {
+    background-color: #141313;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    padding: 40px 32px;
+}
+
+#profile-card .profile-name {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+#profile-card .profile-title {
+    color: #a1a1aa;
+    font-size: 15px;
+    margin-bottom: 32px;
+    font-weight: 500;
+}
+
+#profile-card .avatar-placeholder {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+    border: 3px solid #27272a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+#profile-card .action-buttons {
+    gap: 14px;
+}
+
+#profile-card .btn {
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+}
+
+#profile-card .btn-secondary {
+    background-color: #27272a;
+    color: #f4f4f5;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#profile-card .btn-secondary:hover {
+    background-color: #3f3f46;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#profile-card .btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    border: none;
+}
+
+#profile-card .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
