@@ -193,6 +193,15 @@ async function initEditPage() {
     const authError = document.getElementById('authError');
     const header = document.querySelector('.edit-header');
 
+    const hintEl = document.getElementById('password-hint');
+    if (hintEl) {
+        if (userId === "demo") {
+            hintEl.innerHTML = 'Demo password: <strong>1234</strong>';
+        } else {
+            hintEl.textContent = "Enter your edit access password";
+        }
+    }
+
     const accessKey = "editAccess_" + userId;
 
     // Helper to setup the form once user is authenticated
