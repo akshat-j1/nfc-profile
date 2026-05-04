@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit NFC Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -15,12 +15,12 @@
             <p class="profile-title">Editing user: <strong id="edit-userId">...</strong></p>
         </div>
 
-        <div id="auth-box" style="width: 100%; text-align: left; margin-bottom: 24px;">
-            <h3 style="font-size: 16px; margin-bottom: 8px;">Enter Password</h3>
-            <input type="password" id="passwordInput" class="form-control" placeholder="Enter password" style="margin-bottom: 12px;" />
-            <p class="demo-hint" style="font-size: 13px; color: #666; margin-top: 8px; margin-bottom: 16px;">Demo password: <strong>1234</strong></p>
-            <button id="unlockBtn" class="btn btn-primary">Unlock</button>
-            <p id="authError" style="color:#ef4444; font-weight: 500; font-size: 14px; display:none; margin-top: 12px; text-align: center;">Incorrect password</p>
+        <div id="auth-box" style="width: 100%; text-align: center; margin-bottom: 24px;">
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Enter Password</h3>
+            <input type="password" id="passwordInput" class="form-control" placeholder="Enter password" style="text-align: center; margin-bottom: 12px;" />
+            <p class="demo-hint" style="font-size: 13px; color: #666; margin-bottom: 24px;">Demo password: <strong>1234</strong></p>
+            <button id="unlockBtn" class="btn btn-primary" style="width: 100%;">Unlock</button>
+            <p id="authError" style="color:#ef4444; font-weight: 500; font-size: 14px; display:none; margin-top: 16px; text-align: center;">Incorrect password</p>
         </div>
 
         <form id="edit-form" style="width: 100%; display: none;">
@@ -60,7 +60,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
     <script>
         // Initialize the edit page on load
         document.addEventListener('DOMContentLoaded', () => {
