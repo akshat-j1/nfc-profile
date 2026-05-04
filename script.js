@@ -146,10 +146,15 @@ async function initProfilePage() {
     const errorEl = document.getElementById('error-message');
 
     if (!userId) {
-        console.warn("Invalid link. No user ID provided.");
         loadingEl.style.display = 'none';
-        errorEl.textContent = 'Invalid link. No user ID provided.';
-        errorEl.style.display = 'block';
+        
+        const landingEl = document.getElementById('landing-page');
+        if (landingEl) {
+            landingEl.style.display = 'block';
+        } else {
+            errorEl.textContent = 'Invalid link. No user ID provided.';
+            errorEl.style.display = 'block';
+        }
         return;
     }
 

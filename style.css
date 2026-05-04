@@ -189,3 +189,121 @@ select.form-control {
     margin-bottom: 24px;
     text-align: center;
 }
+
+/* Landing Page Styles */
+.landing-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    width: auto;
+    min-width: 200px;
+}
+
+.how-it-works {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 64px;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .how-it-works {
+        flex-direction: row;
+    }
+}
+
+.step-card {
+    background-color: var(--card-bg);
+    padding: 32px 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    flex: 1;
+    transition: transform 0.2s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+}
+
+.step-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.step-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.features {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+    border-radius: var(--border-radius);
+    padding: 40px;
+    margin-bottom: 64px;
+}
+
+.feature-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 600px) {
+    .feature-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.feature-list li {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.check-icon {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.landing-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+}
