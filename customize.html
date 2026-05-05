@@ -72,6 +72,7 @@
             <div class="hidden md:flex gap-8 items-center">
                 <a href="/" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Home</a>
                 <a href="/products.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Products</a>
+                <a href="/customize.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Customize</a>
                 <a href="/contact.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
             </div>
             <a href="/cart.html" class="flex items-center gap-2 bg-[#c0c1ff]/10 hover:bg-[#c0c1ff]/20 text-[#c0c1ff] px-4 py-2 rounded-full transition-colors relative">
@@ -98,7 +99,7 @@
 
         <div class="customize-container reveal">
             <!-- LEFT SIDE: Live Preview -->
-            <div class="customize-left sticky top-32">
+            <div class="customize-left sticky top-32" id="preview-section">
                 <div class="mb-6">
                     <h2 class="text-3xl font-bold text-white mb-2" id="product-name">Loading...</h2>
                     <p class="text-xl text-zinc-400">Base Price: <span id="product-price" class="text-[#c0c1ff] font-bold">₹0</span></p>
@@ -121,9 +122,31 @@
 
             <!-- RIGHT SIDE: Customization Form -->
             <div class="customize-right bg-[#1c1b1b] p-10 rounded-3xl border border-white/5 shadow-2xl" style="animation-delay: 0.1s;">
-                <h2 class="text-2xl font-bold text-white mb-10 tracking-tight">Customize Details</h2>
+                <h2 class="text-2xl font-bold text-white mb-6 tracking-tight">Select Product</h2>
                 
-                <div class="space-y-8">
+                <div class="grid grid-cols-2 gap-3 mb-10">
+                    <a href="?product=matte-black" class="border border-white/10 rounded-xl p-3 text-center hover:bg-white/5 transition-colors focus-within:ring-2 focus-within:ring-[#c0c1ff]/50" id="opt-matte-black">
+                        <div class="w-full h-8 bg-zinc-900 rounded-lg mb-2 shadow-inner border border-white/5"></div>
+                        <span class="text-xs font-bold text-white">Matte</span>
+                    </a>
+                    <a href="?product=gradient-tech" class="border border-white/10 rounded-xl p-3 text-center hover:bg-white/5 transition-colors focus-within:ring-2 focus-within:ring-[#c0c1ff]/50" id="opt-gradient-tech">
+                        <div class="w-full h-8 bg-gradient-to-br from-indigo-900 to-blue-900 rounded-lg mb-2 shadow-inner border border-white/10"></div>
+                        <span class="text-xs font-bold text-white">Gradient</span>
+                    </a>
+                    <a href="?product=frosted-glass" class="border border-white/10 rounded-xl p-3 text-center hover:bg-white/5 transition-colors focus-within:ring-2 focus-within:ring-[#c0c1ff]/50" id="opt-frosted-glass">
+                        <div class="w-full h-8 bg-white/10 backdrop-blur-md rounded-lg mb-2 shadow-inner border border-white/20"></div>
+                        <span class="text-xs font-bold text-white">Frosted</span>
+                    </a>
+                    <a href="?product=creator" class="border border-white/10 rounded-xl p-3 text-center hover:bg-white/5 transition-colors focus-within:ring-2 focus-within:ring-[#c0c1ff]/50" id="opt-creator">
+                        <div class="w-full h-8 bg-zinc-100 rounded-lg mb-2 shadow-inner border border-black/10"></div>
+                        <span class="text-xs font-bold text-white">Creator</span>
+                    </a>
+                </div>
+
+                <div id="form-section">
+                    <h2 class="text-2xl font-bold text-white mb-6 tracking-tight border-t border-white/5 pt-8">Customize Details</h2>
+                    
+                    <div class="space-y-8">
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">Full Name (Printed on Card)</label>
                         <input type="text" id="input-name" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] focus:ring-2 focus:ring-[#c0c1ff]/20 transition-all duration-200 leading-relaxed" placeholder="e.g. Alex Rivers">
@@ -161,5 +184,27 @@
     </main>
 
     <script src="/app-store.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const currentProduct = params.get('product');
+            
+            if (currentProduct) {
+                // Highlight selected product option
+                const optEl = document.getElementById(`opt-${currentProduct}`);
+                if (optEl) {
+                    optEl.classList.add('bg-white/10', 'border-[#c0c1ff]/50');
+                    optEl.classList.remove('border-white/10');
+                }
+            } else {
+                // Hide form and preview if no product selected
+                document.getElementById('form-section').style.display = 'none';
+                document.getElementById('preview-section').style.opacity = '0.3';
+                document.getElementById('preview-section').style.pointerEvents = 'none';
+                document.getElementById('product-name').textContent = 'Select a card';
+                document.getElementById('product-price').textContent = 'to continue';
+            }
+        });
+    </script>
 </body>
 </html>

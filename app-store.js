@@ -75,14 +75,7 @@ function initTiltEffect() {
 // --- PAGE SPECIFIC INITIALIZERS ---
 function initCustomizePage() {
     const params = new URLSearchParams(window.location.search);
-    const productKey = params.get('product');
-    
-    // VALIDATION: Redirect if no product in URL
-    if (!productKey || !PRODUCTS[productKey]) {
-        window.location.href = '/products.html';
-        return;
-    }
-    
+    const productKey = params.get('product') || 'matte-black';
     const product = PRODUCTS[productKey];
     
     document.getElementById('product-name').textContent = product.name;
@@ -120,14 +113,18 @@ function initCustomizePage() {
             return;
         }
         
+        const currentParams = new URLSearchParams(window.location.search);
+        const currentKey = currentParams.get('product') || 'matte-black';
+        const currentProduct = PRODUCTS[currentKey];
+
         addToCart({
-            product: productKey,
-            productName: product.name,
+            product: currentKey,
+            productName: currentProduct.name,
             name: inputName.value,
             phone: inputPhone.value,
             linkedin: inputLinkedin.value,
             theme: themeSelect.value,
-            price: product.price
+            price: currentProduct.price
         });
         
         window.location.href = '/cart.html';
