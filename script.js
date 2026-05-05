@@ -138,6 +138,20 @@ function handleUser(user) {
     document.getElementById('profile-card').style.display = 'flex';
 }
 
+function showError() {
+    const loadingEl = document.getElementById('loading');
+    const errorEl = document.getElementById('error-message');
+    const profileCard = document.getElementById('profile-card');
+    
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (profileCard) profileCard.style.display = 'none';
+    
+    if (errorEl) {
+        errorEl.textContent = 'User not found.';
+        errorEl.style.display = 'block';
+    }
+}
+
 async function initProfilePage() {
     const userId = getUserId();
     console.log("initProfilePage - Extracted userId:", userId);
@@ -159,19 +173,21 @@ async function initProfilePage() {
     }
 
     try {
-        const user = await getSupabaseUser(userId);
-        if (!user) {
-            loadingEl.style.display = 'none';
-            errorEl.textContent = 'User not found.';
-            errorEl.style.display = 'block';
+        const { data: user, error } = await supabaseClient
+            .from("users")
+            .select("*")
+            .eq("id", userId)
+            .maybeSingle();
+
+        if (!user || error) {
+            showError();
             return;
         }
+        
         handleUser(user);
     } catch (err) {
         console.error("Error in initProfilePage:", err);
-        loadingEl.style.display = 'none';
-        errorEl.textContent = 'User not found.';
-        errorEl.style.display = 'block';
+        showError();
     }
 }
 
