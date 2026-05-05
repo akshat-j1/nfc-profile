@@ -44,38 +44,53 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Maverick -->
-            <div class="flex flex-col items-center text-center reveal group hover:scale-105 transition-transform duration-300">
-                <img src="/images/product1.png" alt="Maverick Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
-                <h3 class="text-xl font-bold text-white mb-2">Maverick Card</h3>
-                <p class="text-2xl font-bold text-[#c0c1ff]">₹399</p>
+            <div class="product-card flex flex-col items-center text-center reveal group transition-all duration-300">
+                <a href="/customize.html?product=maverick" class="w-full flex flex-col items-center">
+                    <img src="/images/product1.png" alt="Maverick Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Maverick Card</h3>
+                    <p class="text-2xl font-bold text-[#c0c1ff]">₹399</p>
+                </a>
+                <button class="mt-4 w-full py-2 bg-[#3131c0] hover:brightness-110 text-white rounded-lg text-sm font-semibold transition z-10 relative" onclick="handleAddToCart('maverick')">Add to Cart</button>
             </div>
 
             <!-- Altitude -->
-            <div class="flex flex-col items-center text-center reveal group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.1s;">
-                <img src="/images/product2.png" alt="Altitude Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
-                <h3 class="text-xl font-bold text-white mb-2">Altitude Card</h3>
-                <p class="text-2xl font-bold text-[#c0c1ff]">₹449</p>
+            <div class="product-card flex flex-col items-center text-center reveal group transition-all duration-300" style="animation-delay: 0.1s;">
+                <a href="/customize.html?product=altitude" class="w-full flex flex-col items-center">
+                    <img src="/images/product2.png" alt="Altitude Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Altitude Card</h3>
+                    <p class="text-2xl font-bold text-[#c0c1ff]">₹449</p>
+                </a>
+                <button class="mt-4 w-full py-2 bg-[#3131c0] hover:brightness-110 text-white rounded-lg text-sm font-semibold transition z-10 relative" onclick="handleAddToCart('altitude')">Add to Cart</button>
             </div>
 
             <!-- Student NFC -->
-            <div class="flex flex-col items-center text-center reveal group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.2s;">
-                <img src="/images/product3.png" alt="Student NFC Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
-                <h3 class="text-xl font-bold text-white mb-2">Student NFC Card</h3>
-                <p class="text-2xl font-bold text-[#c0c1ff]">₹299</p>
+            <div class="product-card flex flex-col items-center text-center reveal group transition-all duration-300" style="animation-delay: 0.2s;">
+                <a href="/customize.html?product=student" class="w-full flex flex-col items-center">
+                    <img src="/images/product3.png" alt="Student NFC Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Student NFC Card</h3>
+                    <p class="text-2xl font-bold text-[#c0c1ff]">₹299</p>
+                </a>
+                <button class="mt-4 w-full py-2 bg-[#3131c0] hover:brightness-110 text-white rounded-lg text-sm font-semibold transition z-10 relative" onclick="handleAddToCart('student')">Add to Cart</button>
             </div>
 
             <!-- Minimal White -->
-            <div class="flex flex-col items-center text-center reveal group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.3s;">
-                <img src="/images/product4.png" alt="Minimal White Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
-                <h3 class="text-xl font-bold text-white mb-2">Minimal White Card</h3>
-                <p class="text-2xl font-bold text-[#c0c1ff]">₹349</p>
+            <div class="product-card flex flex-col items-center text-center reveal group transition-all duration-300" style="animation-delay: 0.3s;">
+                <a href="/customize.html?product=minimal" class="w-full flex flex-col items-center">
+                    <img src="/images/product4.png" alt="Minimal White Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Minimal White Card</h3>
+                    <p class="text-2xl font-bold text-[#c0c1ff]">₹349</p>
+                </a>
+                <button class="mt-4 w-full py-2 bg-[#3131c0] hover:brightness-110 text-white rounded-lg text-sm font-semibold transition z-10 relative" onclick="handleAddToCart('minimal')">Add to Cart</button>
             </div>
 
             <!-- Premium Black -->
-            <div class="flex flex-col items-center text-center reveal group hover:scale-105 transition-transform duration-300" style="animation-delay: 0.4s;">
-                <img src="/images/product5.png" alt="Premium Black Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
-                <h3 class="text-xl font-bold text-white mb-2">Premium Black Card</h3>
-                <p class="text-2xl font-bold text-[#c0c1ff]">₹499</p>
+            <div class="product-card flex flex-col items-center text-center reveal group transition-all duration-300" style="animation-delay: 0.4s;">
+                <a href="/customize.html?product=premium" class="w-full flex flex-col items-center">
+                    <img src="/images/product5.png" alt="Premium Black Card" class="w-full h-auto rounded-2xl shadow-xl mb-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Premium Black Card</h3>
+                    <p class="text-2xl font-bold text-[#c0c1ff]">₹499</p>
+                </a>
+                <button class="mt-4 w-full py-2 bg-[#3131c0] hover:brightness-110 text-white rounded-lg text-sm font-semibold transition z-10 relative" onclick="handleAddToCart('premium')">Add to Cart</button>
             </div>
         </div>
 
@@ -97,5 +112,48 @@
     </main>
 
     <script src="/app-store.js"></script>
+    <script>
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+            });
+        });
+
+        function handleAddToCart(productId) {
+            if (typeof addToCart !== 'undefined' && typeof PRODUCTS !== 'undefined') {
+                const product = PRODUCTS[productId];
+                if(product) {
+                    addToCart({
+                        product: productId,
+                        productName: product.name,
+                        name: 'Base Design',
+                        phone: '',
+                        linkedin: '',
+                        theme: 'standard',
+                        price: product.price
+                    });
+                    
+                    // optional feedback
+                    alert('Added to cart');
+                }
+            } else {
+                console.error('addToCart function or PRODUCTS not found');
+            }
+        }
+    </script>
 </body>
 </html>
