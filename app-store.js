@@ -2,10 +2,11 @@
 // Handles Cart, Products, and 3D effects
 
 const PRODUCTS = {
-    'matte-black': { name: 'Matte Black Card', price: 299 },
-    'gradient-tech': { name: 'Gradient Tech Card', price: 399 },
-    'frosted-glass': { name: 'Frosted Glass Card', price: 499 },
-    'creator': { name: 'Creator Card', price: 599 }
+    'maverick': { name: 'Maverick Card', price: 399 },
+    'altitude': { name: 'Altitude Card', price: 449 },
+    'student': { name: 'Student NFC Card', price: 299 },
+    'minimal': { name: 'Minimal White Card', price: 349 },
+    'premium': { name: 'Premium Black Card', price: 499 }
 };
 
 // --- CART LOGIC ---
@@ -75,7 +76,7 @@ function initTiltEffect() {
 // --- PAGE SPECIFIC INITIALIZERS ---
 function initCustomizePage() {
     const params = new URLSearchParams(window.location.search);
-    const productKey = params.get('product') || 'matte-black';
+    const productKey = params.get('product') || 'maverick';
     const product = PRODUCTS[productKey];
     
     document.getElementById('product-name').textContent = product.name;
@@ -114,7 +115,7 @@ function initCustomizePage() {
         }
         
         const currentParams = new URLSearchParams(window.location.search);
-        const currentKey = currentParams.get('product') || 'matte-black';
+        const currentKey = currentParams.get('product') || 'maverick';
         const currentProduct = PRODUCTS[currentKey];
 
         addToCart({
