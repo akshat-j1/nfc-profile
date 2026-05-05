@@ -175,6 +175,21 @@
 </head>
 <body>
 
+    <!-- Global Navbar -->
+    <nav class="w-full bg-[#141313]/80 backdrop-blur-md border-b border-white/5 fixed top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/" class="text-2xl font-bold text-white tracking-tighter">NEXUS</a>
+            <div class="hidden md:flex gap-8 items-center">
+                <a href="/" class="text-sm font-medium text-white hover:text-white transition-colors">Home</a>
+                <a href="/products.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Products</a>
+                <a href="/contact.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <a href="/cart.html" class="flex items-center gap-2 bg-[#c0c1ff]/10 hover:bg-[#c0c1ff]/20 text-[#c0c1ff] px-4 py-2 rounded-full transition-colors relative">
+                <span class="material-symbols-outlined text-sm">shopping_cart</span>
+                <span class="cart-count absolute -top-1 -right-1 bg-[#c0c1ff] text-black text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full" style="display:none">0</span>
+            </a>
+        </div>
+    </nav>
     <!-- Loading State -->
     <div id="loading" class="loading-state">
         <div class="spinner"></div>
@@ -217,12 +232,12 @@
 </div>
 </div>
 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-<a class="bg-gradient-to-r from-secondary-container to-secondary text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center hover-lift transition-all shadow-xl shadow-secondary-container/20" href="/u/demo">
-                        View Demo
+<a class="bg-gradient-to-r from-secondary-container to-secondary text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center hover-lift transition-all shadow-xl shadow-secondary-container/20" href="/products.html">
+                        View Products
                         <span class="material-symbols-outlined ml-2" data-icon="arrow_forward">arrow_forward</span>
 </a>
-<a class="glass-card text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center hover:bg-white/5 transition-all" href="/edit.html?u=demo">
-                        Edit Demo
+<a class="glass-card text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center hover:bg-white/5 transition-all" href="/customize.html">
+                        Customize Card
                     </a>
 </div>
 </div>
@@ -591,6 +606,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="/script.js"></script>
+    <script src="/app-store.js"></script>
     <script>
         // Initialize the profile page on load
         document.addEventListener('DOMContentLoaded', () => {

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Catalog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        .hover-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .hover-lift:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .tilt-card { transition: transform 0.1s ease-out; transform-style: preserve-3d; }
+        .reveal { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-[#141313] text-[#e5e2e1] pt-28 pb-24">
+
+    <!-- Global Navbar -->
+    <nav class="w-full bg-[#141313]/80 backdrop-blur-md border-b border-white/5 fixed top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/" class="text-2xl font-bold text-white tracking-tighter">NEXUS</a>
+            <div class="hidden md:flex gap-8 items-center">
+                <a href="/" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Home</a>
+                <a href="/products.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Products</a>
+                <a href="/contact.html" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <a href="/cart.html" class="flex items-center gap-2 bg-[#c0c1ff]/10 hover:bg-[#c0c1ff]/20 text-[#c0c1ff] px-4 py-2 rounded-full transition-colors relative">
+                <span class="material-symbols-outlined text-sm">shopping_cart</span>
+                <span class="cart-count absolute -top-1 -right-1 bg-[#c0c1ff] text-black text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full" style="display:none">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Premium NFC Cards</h1>
+            <p class="text-zinc-400 max-w-2xl mx-auto">Choose your style, customize your digital identity, and tap to connect instantly.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Matte Black -->
+            <div class="bg-[#1c1b1b] border border-white/5 rounded-2xl p-6 flex flex-col hover-lift reveal" style="animation-delay: 0.1s;">
+                <div class="w-full aspect-[1.58/1] bg-zinc-900 rounded-xl mb-6 flex flex-col justify-between p-4 shadow-inner tilt-card relative border border-white/5">
+                    <span class="material-symbols-outlined absolute top-4 right-4 text-zinc-700">nfc</span>
+                    <div class="mt-auto">
+                        <div class="text-white font-medium text-sm">Matte Black</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Matte Black Card</h3>
+                <p class="text-2xl font-bold text-[#c0c1ff] mb-6 mt-auto">₹299</p>
+                <a href="/customize.html?product=matte-black" class="w-full py-3 bg-[#3131c0] hover:brightness-110 text-white rounded-xl font-bold text-center transition-all">Customize</a>
+            </div>
+
+            <!-- Gradient Tech -->
+            <div class="bg-[#1c1b1b] border border-white/5 rounded-2xl p-6 flex flex-col hover-lift reveal" style="animation-delay: 0.2s;">
+                <div class="w-full aspect-[1.58/1] bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 rounded-xl mb-6 flex flex-col justify-between p-4 shadow-inner tilt-card relative border border-white/10">
+                    <span class="material-symbols-outlined absolute top-4 right-4 text-white/50">nfc</span>
+                    <div class="mt-auto">
+                        <div class="text-white font-medium text-sm">Gradient Tech</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Gradient Tech Card</h3>
+                <p class="text-2xl font-bold text-[#c0c1ff] mb-6 mt-auto">₹399</p>
+                <a href="/customize.html?product=gradient-tech" class="w-full py-3 bg-[#3131c0] hover:brightness-110 text-white rounded-xl font-bold text-center transition-all">Customize</a>
+            </div>
+
+            <!-- Frosted Glass -->
+            <div class="bg-[#1c1b1b] border border-white/5 rounded-2xl p-6 flex flex-col hover-lift reveal" style="animation-delay: 0.3s;">
+                <div class="w-full aspect-[1.58/1] bg-white/5 backdrop-blur-md rounded-xl mb-6 flex flex-col justify-between p-4 shadow-inner tilt-card relative border border-white/20">
+                    <span class="material-symbols-outlined absolute top-4 right-4 text-white/30">nfc</span>
+                    <div class="mt-auto">
+                        <div class="text-white font-medium text-sm">Frosted Glass</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Frosted Glass Card</h3>
+                <p class="text-2xl font-bold text-[#c0c1ff] mb-6 mt-auto">₹499</p>
+                <a href="/customize.html?product=frosted-glass" class="w-full py-3 bg-[#3131c0] hover:brightness-110 text-white rounded-xl font-bold text-center transition-all">Customize</a>
+            </div>
+
+            <!-- Creator -->
+            <div class="bg-[#1c1b1b] border border-white/5 rounded-2xl p-6 flex flex-col hover-lift reveal" style="animation-delay: 0.4s;">
+                <div class="w-full aspect-[1.58/1] bg-zinc-100 rounded-xl mb-6 flex flex-col justify-between p-4 shadow-inner tilt-card relative border border-black/10">
+                    <span class="material-symbols-outlined absolute top-4 right-4 text-zinc-300">nfc</span>
+                    <div class="mt-auto">
+                        <div class="text-zinc-900 font-bold text-sm">Creator</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Creator Card</h3>
+                <p class="text-2xl font-bold text-[#c0c1ff] mb-6 mt-auto">₹599</p>
+                <a href="/customize.html?product=creator" class="w-full py-3 bg-[#3131c0] hover:brightness-110 text-white rounded-xl font-bold text-center transition-all">Customize</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/app-store.js"></script>
+</body>
+</html>
