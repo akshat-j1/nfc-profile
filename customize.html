@@ -32,11 +32,31 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16 items-start">
-        <!-- Live Preview -->
-        <div class="w-full lg:w-1/2 sticky top-32 reveal">
-            <h2 class="text-2xl font-bold text-white mb-6">Live Preview</h2>
-            <div class="perspective-1000 w-full max-w-[480px] mx-auto">
+    <main class="max-w-7xl mx-auto px-6">
+        
+        <!-- Breadcrumb & Back Nav -->
+        <div class="mb-10 reveal">
+            <a href="/products.html" class="inline-flex items-center text-zinc-400 hover:text-white transition-colors mb-4 font-medium text-sm">
+                <span class="material-symbols-outlined text-sm mr-1">arrow_back</span>
+                Back to Products
+            </a>
+            <div class="flex items-center gap-3 text-sm font-medium">
+                <span class="text-zinc-500">Step 1: Choose Product</span>
+                <span class="material-symbols-outlined text-zinc-600 text-sm">chevron_right</span>
+                <span class="text-[#c0c1ff]">Step 2: Customize</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-16 items-start">
+            <!-- Live Preview -->
+            <div class="w-full lg:w-1/2 sticky top-32 reveal">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-white mb-2" id="product-name">Loading...</h2>
+                    <p class="text-xl text-zinc-400">Base Price: <span id="product-price" class="text-[#c0c1ff] font-bold">₹0</span></p>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-6">Live Preview</h3>
+                <div class="perspective-1000 w-full max-w-[480px]">
                 <div id="preview-card" class="w-full aspect-[1.58/1] bg-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-2xl transition-all duration-300 tilt-card text-white border border-white/10">
                     <div class="flex justify-between items-start">
                         <div class="text-2xl font-bold tracking-tighter">NEXUS</div>
@@ -48,13 +68,8 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-8">
-                <h3 id="product-name" class="text-xl font-bold text-white">Loading...</h3>
-                <p id="product-price" class="text-[#c0c1ff] font-bold text-lg mt-1">₹0</p>
-            </div>
-        </div>
 
-        <!-- Customization Form -->
+            <!-- Customization Form -->
         <div class="w-full lg:w-1/2 bg-[#1c1b1b] p-8 rounded-3xl border border-white/5 shadow-2xl reveal" style="animation-delay: 0.2s;">
             <h2 class="text-2xl font-bold text-white mb-8">Customize Details</h2>
             
@@ -91,6 +106,7 @@
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 
