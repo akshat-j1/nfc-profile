@@ -4,9 +4,492 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC Profile</title>
-    <!-- Modern font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Modern font & Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+           <!-- Landing Page -->
+    <div id="landing-page" style="display: none;" class="bg-background text-on-background font-body-md w-full">
+<main>
+<!-- Hero Section -->
+<section class="relative pt-40 pb-24 px-6 overflow-hidden">
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-secondary-container/5 rounded-full blur-[120px] -z-10"></div>
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1 text-center md:text-left reveal">
+<span class="inline-block px-4 py-1.5 mb-6 rounded-full border border-secondary/20 bg-secondary/5 text-secondary text-label-caps uppercase tracking-widest">Digital Networking v2.0</span>
+<h1 class="font-display text-display mb-4 text-white leading-tight">Your digital identity in one tap</h1>
+<p class="text-secondary font-medium tracking-wide mb-6">No apps. No friction. Just tap.</p>
+<p class="text-body-lg text-on-surface-variant mb-10 max-w-xl">Ditch paper business cards for a professional digital profile that transfers to any smartphone instantly via NFC technology.</p>
+<!-- Credibility -->
+<div class="flex items-center justify-center md:justify-start gap-4 mb-10">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-background bg-zinc-800 flex items-center justify-center text-[10px] text-white">JD</div>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-zinc-700 flex items-center justify-center text-[10px] text-white">MK</div>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-zinc-600 flex items-center justify-center text-[10px] text-white">SL</div>
+</div>
+<div class="flex flex-col items-start">
+<div class="flex text-secondary mb-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+</div>
+<span class="text-sm font-medium tracking-tight text-zinc-400">Used by <span class="text-white font-bold">50,000+</span> professionals worldwide</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+<a class="bg-gradient-to-r from-secondary-container to-secondary text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center hover-lift transition-all shadow-xl shadow-secondary-container/20" href="/u/demo">
+                        View Demo
+                        <span class="material-symbols-outlined ml-2" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="glass-card text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center hover:bg-white/5 transition-all" href="/edit.html?u=demo">
+                        Edit Demo
+                    </a>
+</div>
+</div>
+<div class="flex-1 relative group perspective-1000 reveal" id="hero-card-container">
+<!-- NFC Pulse Effect -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-2 border-secondary/30 rounded-full nfc-pulse"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-2 border-secondary/20 rounded-full nfc-pulse [animation-delay:1s]"></div>
+<!-- Floating Card Mockup with tilt logic -->
+<div class="relative w-full max-w-[420px] aspect-[1.58/1] mx-auto float-anim transition-transform duration-200 tilt-card">
+<!-- Glow effect -->
+<div class="absolute -inset-8 bg-secondary/10 blur-[80px] rounded-full opacity-40 group-hover:opacity-60 transition-opacity"></div>
+<div class="relative w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-950 rounded-2xl p-8 border border-white/10 flex flex-col justify-between shadow-2xl overflow-hidden backdrop-blur-sm">
+<div class="absolute top-0 right-0 w-48 h-48 bg-secondary/5 blur-3xl rounded-full"></div>
+<div class="flex justify-between items-start">
+<div class="text-2xl font-bold tracking-tighter text-white">NEXUS</div>
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="nfc">nfc</span>
+</div>
+<div>
+<div class="text-white text-xl font-medium mb-1">Alex Rivers</div>
+<div class="text-on-surface-variant text-sm font-label-caps uppercase tracking-wider">Senior Solutions Architect</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tap in Style Section -->
+<section class="py-24 px-6 bg-surface-container-low" id="nfc-showcase">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16 reveal">
+<h2 class="font-h1 text-h1 text-white mb-4">Tap in Style</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Four premium finishes engineered for professionals who value first impressions.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Matte Black -->
+<div class="group perspective-1000 h-[240px] reveal">
+<div class="relative w-full h-full preserve-3d duration-700 group-hover:rotate-y-180 transition-transform cursor-pointer">
+<!-- Front -->
+<div class="absolute inset-0 backface-hidden bg-zinc-900 border border-white/10 rounded-2xl p-6 flex flex-col justify-end shadow-xl transition-all">
+<div class="absolute top-4 right-4"><span class="material-symbols-outlined text-zinc-700" data-icon="nfc">nfc</span></div>
+<p class="text-white font-medium">Matte Black</p>
+<p class="text-zinc-500 text-sm">Understated Elegance</p>
+</div>
+<!-- Back -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-zinc-950 border border-secondary/30 rounded-2xl p-6 flex flex-col items-center justify-center gap-4">
+<span class="material-symbols-outlined text-5xl text-secondary" data-icon="qr_code_2">qr_code_2</span>
+<div class="text-[10px] text-zinc-500 font-label-caps uppercase tracking-widest">nexus.id/alexr</div>
+</div>
+</div>
+</div>
+<!-- Gradient Tech -->
+<div class="group perspective-1000 h-[240px] reveal">
+<div class="relative w-full h-full preserve-3d duration-700 group-hover:rotate-y-180 transition-transform cursor-pointer">
+<!-- Front -->
+<div class="absolute inset-0 backface-hidden bg-gradient-to-br from-secondary-container to-secondary rounded-2xl p-6 flex flex-col justify-end shadow-xl transition-all">
+<div class="absolute top-4 right-4"><span class="material-symbols-outlined text-white/50" data-icon="nfc">nfc</span></div>
+<p class="text-white font-medium">Gradient Tech</p>
+<p class="text-white/70 text-sm">Vibrant &amp; Modern</p>
+</div>
+<!-- Back -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-secondary rounded-2xl p-6 flex flex-col items-center justify-center gap-4">
+<span class="material-symbols-outlined text-5xl text-white" data-icon="hub">hub</span>
+<div class="text-[10px] text-white/70 font-label-caps uppercase tracking-widest">Connect Instantly</div>
+</div>
+</div>
+</div>
+<!-- Glass/Frosted -->
+<div class="group perspective-1000 h-[240px] reveal">
+<div class="relative w-full h-full preserve-3d duration-700 group-hover:rotate-y-180 transition-transform cursor-pointer">
+<!-- Front -->
+<div class="absolute inset-0 backface-hidden glass-card rounded-2xl p-6 flex flex-col justify-end shadow-xl transition-all">
+<div class="absolute top-4 right-4"><span class="material-symbols-outlined text-white/30" data-icon="nfc">nfc</span></div>
+<p class="text-white font-medium">Glass / Frosted</p>
+<p class="text-zinc-400 text-sm">Minimalist Transparency</p>
+</div>
+<!-- Back -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 glass-card bg-white/10 rounded-2xl p-6 flex flex-col items-center justify-center gap-4">
+<span class="material-symbols-outlined text-5xl text-white/50" data-icon="blur_on">blur_on</span>
+<div class="text-[10px] text-white/30 font-label-caps uppercase tracking-widest">The Future is Clear</div>
+</div>
+</div>
+</div>
+<!-- Personal Brand -->
+<div class="group perspective-1000 h-[240px] reveal">
+<div class="relative w-full h-full preserve-3d duration-700 group-hover:rotate-y-180 transition-transform cursor-pointer">
+<!-- Front -->
+<div class="absolute inset-0 backface-hidden bg-white rounded-2xl p-6 flex flex-col justify-end overflow-hidden shadow-xl transition-all">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container/10 rounded-full translate-x-8 -translate-y-8"></div>
+<div class="absolute top-4 right-4"><span class="material-symbols-outlined text-zinc-300" data-icon="nfc">nfc</span></div>
+<p class="text-zinc-950 font-medium">Personal Brand</p>
+<p class="text-zinc-600 text-sm">Fully Customizable</p>
+</div>
+<!-- Back -->
+<div class="absolute inset-0 backface-hidden rotate-y-180 bg-zinc-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 border border-zinc-200">
+<span class="material-symbols-outlined text-5xl text-zinc-900" data-icon="palette">palette</span>
+<div class="text-[10px] text-zinc-500 font-label-caps uppercase tracking-widest">Your Identity</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Real Cards Section -->
+<section class="py-32 overflow-hidden bg-background studio-surface">
+<div class="max-w-7xl mx-auto px-6 mb-16 text-center reveal">
+<p class="text-secondary text-label-caps tracking-[0.3em] uppercase mb-4">Choose your style. Make it yours.</p>
+<h2 class="font-h1 text-h1 text-white">Real Cards. Real Impressions.</h2>
+<p class="text-on-surface-variant mt-3 max-w-xl mx-auto">Engineered for tactile satisfaction and a grounded premium feel.</p>
+</div>
+<div class="flex overflow-x-auto no-scrollbar gap-16 px-12 pb-20 justify-center items-center min-h-[400px]">
+<!-- Mockup 1: Matte Black Steel -->
+<div class="min-w-[340px] md:min-w-[380px] aspect-[1.58/1] card-grounded reveal">
+<div class="w-full h-full bg-gradient-to-br from-zinc-800 to-black rounded-[1.2rem] border border-white/5 flex flex-col justify-between p-8 relative overflow-hidden shadow-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="relative z-10 flex justify-between">
+<div class="w-12 h-8 bg-zinc-700/30 rounded flex items-center justify-center border border-white/5"><span class="material-symbols-outlined text-zinc-600 text-xl" data-icon="chip">memory</span></div>
+<span class="material-symbols-outlined text-zinc-600" data-icon="nfc">nfc</span>
+</div>
+<div class="relative z-10">
+<div class="text-white font-medium text-lg">Matte Black Steel</div>
+<div class="text-zinc-500 text-[10px] tracking-widest font-label-caps mt-1">SIGNATURE EDITION</div>
+</div>
+</div>
+</div>
+<!-- Mockup 2: Holographic Tech -->
+<div class="min-w-[340px] md:min-w-[380px] aspect-[1.58/1] card-grounded reveal [transition-delay:100ms]">
+<div class="w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 rounded-[1.2rem] border border-white/10 flex flex-col justify-between p-8 relative overflow-hidden shadow-inner">
+<div class="absolute top-0 right-0 w-full h-full opacity-20 mix-blend-soft-light" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA956W6okh6kV_wgX226YgZ8u0a8jHhaWfZRm8AaiEQU_14T6t7yoRSAD6exDkRJHhl90j414GFNbP96iMNQt6Kw5PUkUDtPwN5aymWXXxIb1r3cH3jf6c5ipFh5Q3-H4w8_ogJ7ApGVnz062t6zaxZeQe_Fqmze4iSos8X6UQ-8w3UWOMWK3anFsd2v4H-9JVVimchdD6lxQmFQdtm6ePs9ZkqP-kWlYu5ZuZguxpVlRoQE_oH-tIrIzArOswOCJCOHcBeEmLCjqE');"></div>
+<div class="relative z-10 flex justify-between">
+<span class="text-white/30 font-bold tracking-tighter">NEXUS</span>
+<span class="material-symbols-outlined text-white/50" data-icon="nfc">nfc</span>
+</div>
+<div class="relative z-10">
+<div class="text-white font-medium text-lg">Holographic Tech</div>
+<div class="text-white/40 text-[10px] tracking-widest font-label-caps mt-1">LIMITED RELEASE</div>
+</div>
+</div>
+</div>
+<!-- Mockup 3: Minimal Porcelain -->
+<div class="min-w-[340px] md:min-w-[380px] aspect-[1.58/1] card-grounded reveal [transition-delay:200ms]">
+<div class="w-full h-full bg-zinc-50 rounded-[1.2rem] border border-black/5 flex flex-col justify-between p-8 relative overflow-hidden shadow-inner">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex justify-between">
+<div class="text-black font-extrabold text-2xl tracking-tighter opacity-80">NX</div>
+<span class="material-symbols-outlined text-black/10" data-icon="nfc">nfc</span>
+</div>
+<div class="relative z-10">
+<div class="text-black font-medium text-lg opacity-90">Minimal Porcelain</div>
+<div class="text-zinc-400 text-[10px] tracking-widest font-label-caps mt-1">STUDIO FINISH</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center reveal">
+<p class="text-zinc-500 text-xs font-medium tracking-wide">Premium NFC cards starting at ₹299</p>
+</div>
+</section>
+<!-- Profile Preview -->
+<section class="py-24 px-6 overflow-hidden" id="features">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 reveal">
+<h2 class="font-h1 text-h1 text-white mb-4">The Digital Interface</h2>
+<p class="text-on-surface-variant max-w-xl">What your contacts see when you tap. Beautiful, fast, and optimized for conversion.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<!-- Sample Card 1 -->
+<div class="w-full md:w-80 glass-card rounded-3xl p-8 hover-lift reveal relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary-container to-secondary"></div>
+<div class="flex flex-col items-center mb-8">
+<div class="w-24 h-24 rounded-full bg-zinc-800 mb-4 overflow-hidden border-4 border-secondary/10 p-1">
+<img alt="Marcus Chen" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArklLYlGi8aWA8XZiWe7scRL0Pw4cQP1GUUN4n5RpL0Yxf7sS3WQ76OO-6BhVMvSsUKvX4eeVLkE76ami7UEfJYUqgxeacCcvI1cX96J0AQwkbveMXRZHZgm1d_uWYW9nIhIADUfVRTX0TCnkxEFHxYTiPx-OEDUxKgD4a-75XLjhXqB11OflmiWlaqBeZ6iTd9VM_mT86KG18AbFgFqPZufPUuUxCmRSEgE7Gp8rZ8s-Y54jmdRlXvsywqtAzxd8KCPOaezFN3oY"/>
+</div>
+<h3 class="text-white font-h2 text-h2 mb-1">Marcus Chen</h3>
+<p class="text-secondary text-sm font-medium">Founding Designer, Apex</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3.5 bg-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform" data-icon="call">call</span>
+<span class="text-sm font-medium">Call Now</span>
+</div>
+<div class="flex items-center gap-4 p-3.5 bg-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform" data-icon="link">link</span>
+<span class="text-sm font-medium">LinkedIn Profile</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-secondary-container text-white rounded-xl hover:brightness-110 transition-all cursor-pointer shadow-lg shadow-secondary-container/10 group">
+<span class="material-symbols-outlined group-hover:animate-bounce" data-icon="person_add">person_add</span>
+<span class="text-sm font-bold">Save Contact</span>
+</div>
+</div>
+</div>
+<!-- Features Pitch Content -->
+<div class="flex-1 md:pl-12 pt-12 reveal">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+<div class="flex gap-6 group">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-2">Instant Connection</h4>
+<p class="text-zinc-400 text-sm leading-relaxed">No typing names or phone numbers. A simple tap initiates a transfer that opens in their native web browser—no app required.</p>
+</div>
+</div>
+<div class="flex gap-6 group">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="update">update</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-2">Real-time Updates</h4>
+<p class="text-zinc-400 text-sm leading-relaxed">Change jobs? New phone number? Update your profile online and your physical NFC card updates automatically.</p>
+</div>
+</div>
+<div class="flex gap-6 group">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="analytics">analytics</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-2">Detailed Analytics</h4>
+<p class="text-zinc-400 text-sm leading-relaxed">Track where and when your card was tapped. Gain insights into your networking ROI with precise tap geolocation.</p>
+</div>
+</div>
+<div class="flex gap-6 group">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-2">Enterprise Ready</h4>
+<p class="text-zinc-400 text-sm leading-relaxed">Centrally manage cards for your entire sales or leadership team with our robust organizational dashboard.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-24 px-6 bg-surface">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-h1 text-h1 text-white text-center mb-16 reveal">Three Steps to Connect</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+<!-- Connector lines for desktop -->
+<div class="hidden md:block absolute top-8 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-secondary/10 to-transparent"></div>
+<div class="relative flex flex-col items-center text-center group reveal">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center mb-6 z-10 group-hover:border-secondary group-hover:scale-105 transition-all duration-300 shadow-xl">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="contactless">contactless</span>
+</div>
+<h3 class="text-white font-bold mb-2">1. Tap NFC</h3>
+<p class="text-zinc-500 text-sm">Tap your card to the top of any modern iPhone or Android device.</p>
+</div>
+<div class="relative flex flex-col items-center text-center group reveal">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center mb-6 z-10 group-hover:border-secondary group-hover:scale-105 transition-all duration-300 shadow-xl">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="open_in_new">open_in_new</span>
+</div>
+<h3 class="text-white font-bold mb-2">2. Open Profile</h3>
+<p class="text-zinc-500 text-sm">The receiver sees a notification. A single click opens your full digital presence.</p>
+</div>
+<div class="relative flex flex-col items-center text-center group reveal">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center mb-6 z-10 group-hover:border-secondary group-hover:scale-105 transition-all duration-300 shadow-xl">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="check_circle">check_circle</span>
+</div>
+<h3 class="text-white font-bold mb-2">3. Take Action</h3>
+<p class="text-zinc-500 text-sm">They can save your contact, follow your social links, or book a meeting instantly.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Pitch Section -->
+<section class="py-24 px-6 bg-secondary-container/5 reveal">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="font-h1 text-h1 text-white mb-8">What is Nexus NFC?</h2>
+<div class="space-y-6 text-on-surface-variant text-body-lg">
+<p>Nexus is more than just a smart business card. It's an entire ecosystem built for the modern professional who values speed, precision, and a high-end personal brand.</p>
+<p>We combine NFC (Near Field Communication) hardware with a cloud-based profile management system. Our mission is to eliminate the friction of networking by making the "handshake to contact-save" pipeline as seamless as possible.</p>
+<p>Used by over 50,000 entrepreneurs and enterprise teams worldwide, Nexus is the gold standard for tactile, high-tech networking.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 px-6 reveal" id="cta-section">
+<div class="max-w-7xl mx-auto">
+<div class="relative bg-gradient-to-br from-secondary-container to-[#07006c] rounded-[40px] p-12 md:p-24 overflow-hidden shadow-2xl border border-white/5">
+<!-- Background texture/pattern -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
+<div class="relative z-10 text-center">
+<h2 class="font-display text-white text-display mb-8">Ready to upgrade your networking game?</h2>
+<p class="text-white/80 text-xl mb-12 max-w-2xl mx-auto">Join the future of professional connectivity today. Design your card, build your profile, and start tapping.</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+<button class="bg-white text-secondary-container px-12 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-transform shadow-xl active:scale-95">
+                            Get your NFC card
+                        </button>
+<button class="bg-transparent border border-white/20 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/5 transition-colors">
+                            Bulk for Teams
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-950 w-full py-16 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-2">
+<div class="text-2xl font-bold text-white mb-6 font-inter tracking-tighter">Nexus NFC</div>
+<p class="text-zinc-500 max-w-sm mb-6 leading-relaxed">
+                    Engineering the future of professional networking through innovative NFC hardware and intelligent digital identity management.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary/10 transition-colors" href="#"><span class="material-symbols-outlined text-zinc-400" data-icon="public">public</span></a>
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary/10 transition-colors" href="#"><span class="material-symbols-outlined text-zinc-400" data-icon="alternate_email">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Product</h4>
+<ul class="space-y-4 text-zinc-500 text-sm">
+<li><a class="hover:text-secondary transition-colors" href="#nfc-showcase">NFC Cards</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#features">Digital Profiles</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Enterprise Dash</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Partner Program</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Resources</h4>
+<ul class="space-y-4 text-zinc-500 text-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">API Docs</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Case Studies</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Blog</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-xs text-zinc-600 font-inter">© 2024 Nexus NFC Platform. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-zinc-600 hover:text-secondary transition-colors font-inter text-xs" href="#">Privacy Policy</a>
+<a class="text-zinc-600 hover:text-secondary transition-colors font-inter text-xs" href="#">Terms of Service</a>
+<a class="text-zinc-600 hover:text-secondary transition-colors font-inter text-xs" href="#">Cookie Settings</a>
+</div>
+</div>
+</div>
+</footer>
+    </div>
+        "stack-xl": "64px",
+                    "margin-desktop": "64px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h1": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        .perspective-1000 { perspective: 1000px; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nfc-pulse {
+            animation: pulse-ring 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .float-anim {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotateX(10deg) rotateY(10deg); }
+            50% { transform: translateY(-20px) rotateX(14deg) rotateY(8deg); }
+        }
+
+        .reveal {
+            opacity: 1; /* override to ensure visibility */
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift {
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(192, 193, 255, 0.2);
+        }
+
+        .tilt-card {
+            transition: transform 0.25s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .studio-surface {
+            background-image: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.02) 0%, transparent 70%);
+            background-color: #0c0c0c;
+        }
+
+        .card-grounded {
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transform: perspective(1000px) rotateX(25deg) rotateY(-10deg) rotateZ(-5deg);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .card-grounded:hover {
+            transform: perspective(1000px) rotateX(15deg) rotateY(-5deg) rotateZ(-2deg) translateY(-10px);
+            filter: drop-shadow(0 30px 40px rgba(0,0,0,0.7));
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
 <body>
 
