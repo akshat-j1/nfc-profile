@@ -9,9 +9,9 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <style>
-        .tilt-card { transition: transform 0.1s ease-out; transform-style: preserve-3d; }
-        .reveal { animation: fadeIn 0.6s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .tilt-card { transition: transform 0.1s ease-out, box-shadow 0.3s ease; }
+        .reveal { animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Custom Layout Classes */
         .customize-container {
@@ -35,6 +35,21 @@
             white-space: nowrap;
             width: 100%;
             padding: 14px 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .customize-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(49, 49, 192, 0.3);
+        }
+        .customize-btn:active {
+            transform: scale(0.98);
+        }
+        .live-update {
+            animation: textUpdate 0.15s ease-out;
+        }
+        @keyframes textUpdate {
+            0% { opacity: 0.5; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
         }
         @media (max-width: 768px) {
             .customize-container {
@@ -91,7 +106,7 @@
                 
                 <h3 class="text-xl font-bold text-white mb-4">Live Preview</h3>
                 <div class="perspective-1000 w-full">
-                    <div id="preview-card" class="w-full aspect-[1.58/1] bg-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-2xl transition-all duration-300 tilt-card text-white border border-white/10">
+                    <div id="preview-card" class="w-full aspect-[1.58/1] bg-zinc-900 rounded-2xl p-6 flex flex-col justify-between shadow-2xl transition-all duration-300 tilt-card text-white border border-white/10 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                         <div class="flex justify-between items-start">
                             <div class="text-2xl font-bold tracking-tighter">NEXUS</div>
                             <span class="material-symbols-outlined opacity-50">nfc</span>
@@ -105,28 +120,28 @@
             </div>
 
             <!-- RIGHT SIDE: Customization Form -->
-            <div class="customize-right bg-[#1c1b1b] p-8 rounded-3xl border border-white/5 shadow-2xl" style="animation-delay: 0.2s;">
-                <h2 class="text-2xl font-bold text-white mb-8">Customize Details</h2>
+            <div class="customize-right bg-[#1c1b1b] p-10 rounded-3xl border border-white/5 shadow-2xl" style="animation-delay: 0.1s;">
+                <h2 class="text-2xl font-bold text-white mb-10 tracking-tight">Customize Details</h2>
                 
-                <div class="space-y-6">
+                <div class="space-y-8">
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">Full Name (Printed on Card)</label>
-                        <input type="text" id="input-name" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] transition-colors" placeholder="e.g. Alex Rivers">
+                        <input type="text" id="input-name" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] focus:ring-2 focus:ring-[#c0c1ff]/20 transition-all duration-200 leading-relaxed" placeholder="e.g. Alex Rivers">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">Phone Number</label>
-                        <input type="tel" id="input-phone" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] transition-colors" placeholder="e.g. 9876543210">
+                        <input type="tel" id="input-phone" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] focus:ring-2 focus:ring-[#c0c1ff]/20 transition-all duration-200 leading-relaxed" placeholder="e.g. 9876543210">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">LinkedIn URL (Optional)</label>
-                        <input type="url" id="input-linkedin" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] transition-colors" placeholder="https://linkedin.com/in/username">
+                        <input type="url" id="input-linkedin" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] focus:ring-2 focus:ring-[#c0c1ff]/20 transition-all duration-200 leading-relaxed" placeholder="https://linkedin.com/in/username">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-zinc-400 mb-2">Card Theme</label>
-                        <select id="input-theme" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] transition-colors appearance-none">
+                        <select id="input-theme" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#c0c1ff] focus:ring-2 focus:ring-[#c0c1ff]/20 transition-all duration-200 appearance-none leading-relaxed">
                             <option value="dark">Matte Dark</option>
                             <option value="light">Creator Light</option>
                             <option value="gradient">Holographic Tech</option>

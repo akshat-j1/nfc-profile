@@ -97,6 +97,11 @@ function initCustomizePage() {
     
     inputName.addEventListener('input', (e) => {
         previewName.textContent = e.target.value || 'Your Name';
+        
+        // Trigger live-update animation
+        previewName.classList.remove('live-update');
+        void previewName.offsetWidth; // Trigger reflow
+        previewName.classList.add('live-update');
     });
     
     themeSelect.addEventListener('change', (e) => {
