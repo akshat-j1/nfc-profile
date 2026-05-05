@@ -75,8 +75,15 @@ function initTiltEffect() {
 // --- PAGE SPECIFIC INITIALIZERS ---
 function initCustomizePage() {
     const params = new URLSearchParams(window.location.search);
-    const productKey = params.get('product') || 'matte-black';
-    const product = PRODUCTS[productKey] || PRODUCTS['matte-black'];
+    const productKey = params.get('product');
+    
+    // VALIDATION: Redirect if no product in URL
+    if (!productKey || !PRODUCTS[productKey]) {
+        window.location.href = '/products.html';
+        return;
+    }
+    
+    const product = PRODUCTS[productKey];
     
     document.getElementById('product-name').textContent = product.name;
     document.getElementById('product-price').textContent = `₹${product.price}`;
